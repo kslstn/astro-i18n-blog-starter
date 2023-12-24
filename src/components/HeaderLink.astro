@@ -6,10 +6,15 @@ type Props = HTMLAttributes<'a'>;
 const { href, class: className, ...props } = Astro.props;
 
 const { pathname } = Astro.url;
-const isActive = href === pathname || href === pathname.replace(/\/$/, '');
+const ariaCurrent = href === pathname || href === pathname.replace(/\/$/, '') ? 'page' : '' ;
 ---
 
-<a href={href} class:list={[className, { active: isActive }]} {...props}>
+<a
+	href={href}
+	class:list={[className]}
+	aria-current={ariaCurrent ? ariaCurrent : undefined}
+	{...props}
+>
 	<slot />
 </a>
 <style>
@@ -17,8 +22,7 @@ const isActive = href === pathname || href === pathname.replace(/\/$/, '');
 		display: inline-block;
 		text-decoration: none;
 	}
-	a.active {
+	a[aria-current=page] {
 		font-weight: bolder;
-		text-decoration: underline;
 	}
 </style>

@@ -1,0 +1,16 @@
+---
+
+import Html from "../components/Html.astro";
+import Header from "../components/Header.astro";
+
+const { title } = Astro.props;
+---
+<Html>
+  <Header />
+  <main>
+    <article>
+      <h1>{title}</h1>
+      <slot/>
+    </article>
+  </main>
+</Html>

@@ -1,0 +1,67 @@
+---
+// Import the global.css file here so that it is included on
+// all pages through the use of the <BaseHead /> component.
+import '../styles/global.css';
+
+import { siteTitle, siteThemeColor } from '@root/consts';
+
+interface Props {
+	title: string;
+	description?: string;
+	image?: string;
+}
+
+let { title } = Astro.props
+title = `${title} | ${siteTitle}`
+
+const {description, image = '/blog-placeholder-1.jpg' } = Astro.props,
+	canonicalURL = new URL(Astro.url.pathname, Astro.site),
+	mode = import.meta.env.MODE,
+	faviconIco 			= mode === 'development' ? '/favicon-dev.ico' : '/favicon.ico',
+	faviconSVG 			= mode === 'development' ? '/favicon-dev.svg' : '/favicon.svg',
+	appleTouchIcon	= mode === 'development' ? '/apple-touch-icon-dev.png' : '/apple-touch-icon.png'	
+---
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+
+<!-- Favicons based on https://evilmartians.com/chronicles/how-to-favicon-in-2021-six-files-that-fit-most-needs -->
+<link rel="icon" href={faviconIco} sizes="32x32">
+<link rel="icon" href={faviconSVG} type="image/svg+xml">
+<link rel="apple-touch-icon" href={appleTouchIcon}>
+<link rel="manifest" href="/manifest.webmanifest">
+
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+{description &&
+	<meta name="description" content={description} />
+}
+<!-- Theme color -->
+<meta name="theme-color" content={siteThemeColor}>
+<meta name="msapplication-navbutton-color" content={siteThemeColor}>
+<meta name="apple-mobile-web-app-status-bar-style" content={siteThemeColor}>
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={Astro.url} />
+<meta property="og:title" content={title} />
+{description &&
+	<meta property="og:description" content={description} />
+}
+<meta property="og:image" content={new URL(image, Astro.url)} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:title" content={title} />
+{description &&
+	<meta property="twitter:description" content={description} />
+}
+<meta property="twitter:image" content={new URL(image, Astro.url)} />

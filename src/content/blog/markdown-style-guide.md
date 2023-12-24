@@ -173,6 +173,26 @@ Output
 - Dairy
   - Milk
   - Cheese
+
+Mixed list:
+
+- Fruit
+  1. Apple
+  2. Orange
+  3. Banana
+- Dairy
+  1. Milk
+  2. Cheese
+
+Mixed list:
+
+1. Fruit
+    - Apple
+    - Orange
+    - Banana
+2. Dairy
+    - Milk
+    - Cheese
 ```
 
 #### Output
@@ -184,6 +204,26 @@ Output
 - Dairy
   - Milk
   - Cheese
+
+Mixed list:
+
+- Fruit
+  1. Apple
+  2. Orange
+  3. Banana
+- Dairy
+  1. Milk
+  2. Cheese
+
+Mixed list:
+
+1. Fruit
+    - Apple
+    - Orange
+    - Banana
+2. Dairy
+    - Milk
+    - Cheese
 
 ## Other Elements — abbr, sub, sup, kbd, mark
 

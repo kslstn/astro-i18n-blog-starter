@@ -1,0 +1,32 @@
+---
+const {frontmatter} = Astro.props
+import Html from '@components/Html.astro';
+import Header from '@components/Header.astro';
+import FormattedDate from '@components/FormattedDate.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+);
+---
+<Html>
+	<Header/>
+	<main>
+		<h1>{frontmatter.title}</h1>
+		<ul>
+			{
+				posts.map((post) => (
+					<li>
+						<a href={`/blog/${post.slug}/`}>
+							<img width={720} height={360} src={post.data.heroImage} alt="" />
+							<h2 class="title">{post.data.title}</h2>
+							<p class="date">
+								<FormattedDate date={post.data.pubDate} />
+							</p>
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</main>
+</Html>

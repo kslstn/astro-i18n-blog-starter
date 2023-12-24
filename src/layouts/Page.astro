@@ -1,0 +1,13 @@
+---
+import Html from '@components/Html.astro';
+import Header from "../components/Header.astro";
+const {frontmatter} = Astro.props
+---
+<Html>
+	<Header/>
+	<main>
+		<h1>{ frontmatter.title }</h1>
+		<slot/>
+	</main>
+</Html>
+	
