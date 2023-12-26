@@ -1,12 +1,12 @@
 ---
 import Head from '@components/Head.astro';
-import { siteTitle, siteDescription } from '@root/consts';
+const {title, description, image} = Astro.props
 const lang = Astro.currentLocale;
 ---
 <!doctype html>
 <html lang={lang}>
   <head>
-    <Head title={siteTitle} description={siteDescription} />
+    <Head title={title} description={description} image={image}/>
   </head>
   <body>
 		<slot/>

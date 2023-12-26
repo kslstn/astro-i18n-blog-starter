@@ -3,9 +3,13 @@
 import Html from "../components/Html.astro";
 import Header from "../components/Header.astro";
 
-const { title } = Astro.props;
+const
+	{frontmatter} = Astro.props,
+	title = frontmatter.title,
+	description = frontmatter.description,
+	previewImage = frontmatter.previewImage
 ---
-<Html>
+<Html title={title} description={description} image={previewImage} />
   <Header />
   <main>
     <article class="prose">

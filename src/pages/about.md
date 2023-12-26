@@ -3,7 +3,7 @@ layout: '@layouts/Page.astro'
 title: "About Me"
 description: "Lorem ipsum dolor sit amet"
 pubDate: '2023-08-21'
-heroImage: "/blog-placeholder-about.jpg"
+previewImage: "/blog-placeholder-about.jpg"
 ---
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
 labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo

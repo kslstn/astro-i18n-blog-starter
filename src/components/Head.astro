@@ -2,8 +2,8 @@
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
-
-import { siteTitle, siteThemeColor } from '@root/consts';
+import '../styles/prose.css';
+import { siteTitle, siteDescription, siteThemeColor } from '@root/consts';
 
 interface Props {
 	title: string;
@@ -12,9 +12,9 @@ interface Props {
 }
 
 let { title } = Astro.props
-title = `${title} | ${siteTitle}`
+title = title ? `${title} | ${siteTitle}` : siteTitle
 
-const {description, image = '/blog-placeholder-1.jpg' } = Astro.props,
+const {description = siteDescription, image = '/blog-placeholder-1.jpg' } = Astro.props,
 	canonicalURL = new URL(Astro.url.pathname, Astro.site),
 	mode = import.meta.env.MODE,
 	faviconIco 			= mode === 'development' ? '/favicon-dev.ico' : '/favicon.ico',

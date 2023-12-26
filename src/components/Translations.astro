@@ -1,0 +1,16 @@
+---
+import { getCollection } from 'astro:content';
+const {frontmatter} = Astro.props
+
+
+
+const translations = (await getCollection('blog')).sort(
+	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+);
+
+---
+{frontmatter.reference &&
+	<aside>
+		Available in: 
+	</aside>
+}
