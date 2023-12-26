@@ -5,7 +5,10 @@ import sitemap from '@astrojs/sitemap';
 
 const i18n = {
 	defaultLocale: "en",
-	locales: ["en", "nl"]
+	locales: ["en", "nl"],
+	fallback: {
+		nl: "en",
+	}
 }
 
 

@@ -1,6 +1,19 @@
 ---
+import Config from '../../astro.config.mjs'
+import {getRelativeLocaleUrl} from "astro:i18n";
 import HeaderLink from './HeaderLink.astro';
 import { siteTitle } from '@root/consts';
+import { headerMenu } from '@root/header';
+
+const homeURL = getRelativeLocaleUrl(Astro.currentLocale, "");
+
+const menuLocale =  headerMenu[Astro.currentLocale] ? Astro.currentLocale : Config.i18n.fallback[Astro.currentLocale] || Config.i18n?.defaultLocale
+console.log("file: Header.astro:11 ~ menuLocale:", menuLocale)
+
+const headerMenuItems = headerMenu[menuLocale].items
+
+const { pathname } = Astro.url;
+const homeIsCurrent = pathname === homeURL ? 'page' : '' ;
 ---
 
 <header>
@@ -11,46 +24,31 @@ import { siteTitle } from '@root/consts';
 			<HeaderLink href="/blog">Blog</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
 		</div>
+		<ul class="header__list">
+			<li class="header__home-item">
+				<a
+					href={homeURL}
+					aria-current={homeIsCurrent ? homeIsCurrent : undefined}
+				>
+					{siteTitle}
+				</a>
+			</li>
+			{headerMenuItems.map((item) => (
+				<HeaderLink href={item.path}>{item.label}</HeaderLink>
+			))}
+		</ul>
 	</nav>
 </header>
-<style>
-	header {
-		margin: 0;
-		padding: 0 1em;
-		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
-	}
-	h2 {
-		margin: 0;
-		font-size: 1em;
-	}
 
-	h2 a,
-	h2 a.active {
-		text-decoration: none;
-	}
-	nav {
+<style>
+	.header__list{
 		display: flex;
-		align-items: center;
-		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: 1em;
+		max-width: 100%;
+		overflow-x: auto;
 	}
-	nav a {
-		padding: 1em 0.5em;
-		color: var(--black);
-		border-bottom: 4px solid transparent;
-		text-decoration: none;
-	}
-	nav a.active {
-		text-decoration: none;
-		border-bottom-color: var(--accent);
-	}
-	.social-links,
-	.social-links a {
-		display: flex;
-	}
-	@media (max-width: 720px) {
-		.social-links {
-			display: none;
-		}
+	.header__home-item{
+		flex-grow: 1;
 	}
 </style>

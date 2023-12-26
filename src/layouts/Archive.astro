@@ -12,7 +12,10 @@ const posts = (await getCollection('blog')).sort(
 <Html>
 	<Header/>
 	<main>
-		<h1>{frontmatter.title}</h1>
+		<header class="prose">
+			<h1>{frontmatter.title}</h1>
+			<slot/>
+		</header>
 		<ul>
 			{
 				posts.map((post) => (

@@ -8,20 +8,18 @@ const { href, class: className, ...props } = Astro.props;
 const { pathname } = Astro.url;
 const ariaCurrent = href === pathname || href === pathname.replace(/\/$/, '') ? 'page' : '' ;
 ---
+<li>
+	<a
+		href={href}
+		class:list={[className]}
+		aria-current={ariaCurrent ? ariaCurrent : undefined}
+		{...props}
+	>
+		<slot />
+	</a>
+</li>
 
-<a
-	href={href}
-	class:list={[className]}
-	aria-current={ariaCurrent ? ariaCurrent : undefined}
-	{...props}
->
-	<slot />
-</a>
 <style>
-	a {
-		display: inline-block;
-		text-decoration: none;
-	}
 	a[aria-current=page] {
 		font-weight: bolder;
 	}
