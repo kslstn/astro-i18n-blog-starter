@@ -1,16 +1,50 @@
 ---
+import { getLocaleFromUrl } from '../i18n/utils';
+import { uiStrings } from '../i18n/ui';
 import { getCollection } from 'astro:content';
-const {frontmatter} = Astro.props
 
+const pageTranslationsAvailableIn = `${uiStrings.pageTranslationsAvailableIn[Astro.currentLocale]} `
+const {reference} = Astro.props
 
+let translationsAvailable:Array<object> = []
+let translationLinks:Array<object> = []
 
-const translations = (await getCollection('blog')).sort(
-	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
-);
+if (reference){
+	const translatedPosts = await getCollection('blog', ({ data }) => {
+		return data.reference ===  reference;
+	});
+	const allPages = await Astro.glob('../pages/**/*.md')
+	translationsAvailable = allPages
+    .filter(({ frontmatter }) => {
+			return frontmatter.reference !== null && frontmatter.reference === reference
+		})
+		.filter(page => {
+			return getLocaleFromUrl(page.url) !== Astro.currentLocale
+		})
+	
+	for (const translation of translationsAvailable){
+		const language = getLocaleFromUrl(translation.url)
+		const link = {
+			path: translation.url,
+			language: language,
+			label: uiStrings[Astro.currentLocale][language]
+		}
+		translationLinks.push(link)
+	}
+}
 
 ---
-{frontmatter.reference &&
+{translationLinks &&
 	<aside>
-		Available in: 
+		<p>
+			{pageTranslationsAvailableIn} {translationLinks.map((translation, index) => (
+				<a href="{translation.path}" hreflang="{translation.language}">
+					{translation.label}
+				</a>
+				<span>{index < translationLinks.length - 1 ?
+					', ' : ''
+				}</span>
+			))}.
+		</p>
 	</aside>
 }

@@ -3,10 +3,11 @@ import type { CollectionEntry } from "astro:content";
 import Html from "../components/Html.astro";
 import Header from "../components/Header.astro";
 import FormattedDate from "../components/FormattedDate.astro";
+import Translations from "../components/Translations.astro";
 
 type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, pubDate, updatedDate, previewImage } = Astro.props;
+const { title, description, pubDate, updatedDate, previewImage, reference } = Astro.props;
 ---
 
 <Html title={title} description={description} image={previewImage} />
@@ -34,4 +35,5 @@ const { title, description, pubDate, updatedDate, previewImage } = Astro.props;
       </div>
     </article>
   </main>
+	<Translations reference={reference} />
 </Html>
