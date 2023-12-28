@@ -8,7 +8,6 @@ import { headerMenu } from '@root/header';
 const homeURL = getRelativeLocaleUrl(Astro.currentLocale, "");
 
 const menuLocale =  headerMenu[Astro.currentLocale] ? Astro.currentLocale : Config.i18n.fallback[Astro.currentLocale] || Config.i18n?.defaultLocale
-console.log("file: Header.astro:11 ~ menuLocale:", menuLocale)
 
 const headerMenuItems = headerMenu[menuLocale].items
 

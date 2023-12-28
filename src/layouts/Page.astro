@@ -12,10 +12,10 @@ const
 	reference = frontmatter.reference
 ---
 <Html title={title} description={description} image={previewImage} />
+	<Translations reference={reference} collection="pages"/>
 	<Header />
 	<main class="prose">
 		<h1>{title}</h1>
 		<slot/>
 	</main>
-	<Translations reference={reference} />
 </Html>

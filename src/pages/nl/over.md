@@ -1,6 +1,6 @@
 ---
 layout: '@layouts/Page.astro'
-title: "About this website"
+title: "Over deze website"
 description: "Lorem ipsum dolor sit amet"
 reference: about
 ---

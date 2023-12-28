@@ -6,17 +6,17 @@ export const uiStrings = {
 	},
 	en: {
 		en: 'English',
-		de: 'German',
-		nl: 'Dutch',
+		de: 'englisch',
+		nl: 'Engels',
 	},
 	de: {
-		en: 'englisch',
+		en: 'German',
 		de: 'deutsch',
-		nl: 'niederländisch',
+		nl: 'Duits',
 	},
 	nl: {
-		en: 'Engels',
-		de: 'Duits',
+		en: 'Dutch',
+		de: 'niederländisch',
 		nl: 'Nederlands'
 	}
 };

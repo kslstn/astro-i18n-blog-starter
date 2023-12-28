@@ -1,44 +1,65 @@
 ---
-import { getLocaleFromUrl } from '../i18n/utils';
+// Shows if there are translations of the page and if so, links to them.
+// A translation is identified by its 'reference' frontmatter value.
+
+import { getLocaleFromUrl} from '../i18n/utils';
 import { uiStrings } from '../i18n/ui';
 import { getCollection } from 'astro:content';
 
 const pageTranslationsAvailableIn = `${uiStrings.pageTranslationsAvailableIn[Astro.currentLocale]} `
-const {reference} = Astro.props
+const {reference, collection} = Astro.props
 
-let translationsAvailable:Array<object> = []
-let translationLinks:Array<object> = []
+let translationsAvailable = []
+let translationLinks:[{path: string, locale: string, label: string}?] = []
 
 if (reference){
-	const translatedPosts = await getCollection('blog', ({ data }) => {
-		return data.reference ===  reference;
-	});
-	const allPages = await Astro.glob('../pages/**/*.md')
-	translationsAvailable = allPages
-    .filter(({ frontmatter }) => {
-			return frontmatter.reference !== null && frontmatter.reference === reference
-		})
-		.filter(page => {
-			return getLocaleFromUrl(page.url) !== Astro.currentLocale
-		})
-	
-	for (const translation of translationsAvailable){
-		const language = getLocaleFromUrl(translation.url)
-		const link = {
-			path: translation.url,
-			language: language,
-			label: uiStrings[Astro.currentLocale][language]
+	if (collection == 'pages'){
+		// The current page is not part of a collection
+		const allPages = await Astro.glob('../pages/**/*.{md,mdx}')
+		translationsAvailable = allPages
+			.filter(({ frontmatter }) => {
+				return frontmatter.reference !== null && frontmatter.reference === reference
+			})
+			.filter(page => {
+				return getLocaleFromUrl(page.url) !== Astro.currentLocale
+			})
+		for (const translation of translationsAvailable){
+			const locale = getLocaleFromUrl(translation.url)
+			const link = {
+				path: translation.url || '/',
+				locale: locale,
+				label: uiStrings[locale][Astro.currentLocale]
+			}
+			translationLinks.push(link)
 		}
-		translationLinks.push(link)
+	}
+	else{
+		// The current page is part of a collection
+		const filteredEntries = await getCollection(collection, (entry) => {
+			return entry.data.reference === reference
+		});
+		const translationsSlugs = filteredEntries
+			.filter(function(entry){ return getLocaleFromUrl(entry.slug) !== Astro.currentLocale })
+			.map(entry => (entry.slug))
+
+		for (const slug of translationsSlugs){
+			const locale = getLocaleFromUrl(slug)
+			const link = {
+				path: `/${collection}/${slug}`,
+				locale: locale,
+				label: uiStrings[locale][Astro.currentLocale]
+			}
+			translationLinks.push(link)
+		}
 	}
 }
 
 ---
-{translationLinks &&
+{translationLinks && pageTranslationsAvailableIn &&
 	<aside>
 		<p>
 			{pageTranslationsAvailableIn} {translationLinks.map((translation, index) => (
-				<a href="{translation.path}" hreflang="{translation.language}">
+				<a href={translation.path} hreflang={translation.locale}>
 					{translation.label}
 				</a>
 				<span>{index < translationLinks.length - 1 ?

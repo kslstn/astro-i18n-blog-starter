@@ -3,14 +3,10 @@ import mdx from '@astrojs/mdx';
 
 import sitemap from '@astrojs/sitemap';
 
-const i18n = {
+const internationalizationSettingsMain = {
 	defaultLocale: "en",
 	locales: ["en", "nl", "de"],
-	fallback: {
-		nl: "en",
-	}
 }
-
 
 // https://astro.build/config
 export default defineConfig({
@@ -18,10 +14,13 @@ export default defineConfig({
 	integrations: [
 		mdx(),
 		sitemap({
-			i18n: i18n
+			i18n: internationalizationSettingsMain
 		})
 	],
-
-	i18n: i18n
-
+	i18n: {
+		...internationalizationSettingsMain,
+		fallback: {
+			nl: "en",
+		}
+	}
 });

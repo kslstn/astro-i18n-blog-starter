@@ -1,7 +1,7 @@
 ---
-title: 'First post'
+title: 'Erster Post'
 description: 'Lorem ipsum dolor sit amet'
-pubDate: 'Jul 08 2022'
+pubDate: 'Jul 07 2022'
 previewImage: '/blog-placeholder-3.jpg'
 reference: first-post
 ---

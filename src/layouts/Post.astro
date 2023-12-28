@@ -11,6 +11,7 @@ const { title, description, pubDate, updatedDate, previewImage, reference } = As
 ---
 
 <Html title={title} description={description} image={previewImage} />
+  <Translations reference={reference} collection="blog"/>
   <Header />
   <main>
     <article>
@@ -35,5 +36,4 @@ const { title, description, pubDate, updatedDate, previewImage, reference } = As
       </div>
     </article>
   </main>
-	<Translations reference={reference} />
 </Html>
