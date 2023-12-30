@@ -6,7 +6,7 @@ const
   {frontmatter} = Astro.props,
 	title = frontmatter.title;
 ---
-<Html frontmatter={frontmatter} />
+<Html frontmatter={frontmatter} includeCanonicalMeta={false} />
   <Header />
   <main>
     <article class="prose">

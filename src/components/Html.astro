@@ -1,12 +1,12 @@
 ---
 import Head from '@components/Head.astro';
-const {frontmatter, translationLinks = [] } = Astro.props
+const {frontmatter, translationLinks = [], includeCanonicalMeta = true} = Astro.props
 const lang = Astro.currentLocale;
 ---
 <!doctype html>
 <html lang={lang}>
   <head>
-    <Head frontmatter={frontmatter} translationLinks={translationLinks} />
+    <Head frontmatter={frontmatter} translationLinks={translationLinks} includeCanonicalMeta={includeCanonicalMeta}/>
   </head>
   <body>
 		<slot/>

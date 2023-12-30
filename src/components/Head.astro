@@ -11,18 +11,19 @@ interface Props {
 		description?: string;
 		image?: string;
 		previewImage?: string;
+		canonical: string;
 	}
 	translationLinks?: [{path: string, locale: string, label: string}?]
+	includeCanonicalMeta?: boolean;
 }
 
-const {translationLinks} = Astro.props
 const
 	mode = import.meta.env.MODE,
-	{frontmatter} = Astro.props,
+	{frontmatter, includeCanonicalMeta =  true, translationLinks} = Astro.props,
 	title = frontmatter.title ? `${frontmatter.title} | ${siteTitle}` : siteTitle,
 	description = frontmatter.description || siteDescription,
 	previewImage =  frontmatter.previewImage || '/blog-placeholder-1.jpg',
-	canonicalURL = new URL(Astro.url.pathname, Astro.site),
+	canonicalURL = new URL(frontmatter.canonical || Astro.url.pathname, Astro.site),
 	faviconIco 			= mode === 'development' ? '/favicon-dev.ico' : '/favicon.ico',
 	faviconSVG 			= mode === 'development' ? '/favicon-dev.svg' : '/favicon.svg',
 	appleTouchIcon	= mode === 'development' ? '/apple-touch-icon-dev.png' : '/apple-touch-icon.png';
@@ -41,9 +42,10 @@ const
 <link rel="manifest" href="/manifest.webmanifest">
 
 
-<!-- Canonical URL -->
-<link rel="canonical" href={canonicalURL} />
-
+{includeCanonicalMeta &&
+	<!-- Canonical URL -->
+	<link rel="canonical" href={canonicalURL} />
+}
 <!-- Translations -->
 {translationLinks.map((translation) => ( 
 	<link rel="alternate" hreflang={translation.locale} href={translation.path}>
