@@ -1,6 +1,6 @@
 ---
 import Head from '@components/Head.astro';
-const {frontmatter, translationLinks} = Astro.props
+const {frontmatter, translationLinks = [] } = Astro.props
 const lang = Astro.currentLocale;
 ---
 <!doctype html>

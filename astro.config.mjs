@@ -1,12 +1,8 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
+import { defaultLocale, locales, fallback } from './src/i18n';
 
 import sitemap from '@astrojs/sitemap';
-
-const internationalizationSettingsMain = {
-	defaultLocale: "en",
-	locales: ["en", "nl", "de"],
-}
 
 // https://astro.build/config
 export default defineConfig({
@@ -14,13 +10,15 @@ export default defineConfig({
 	integrations: [
 		mdx(),
 		sitemap({
-			i18n: internationalizationSettingsMain
+			i18n: {
+				defaultLocale: defaultLocale,
+				locales: locales,
+			}
 		})
 	],
 	i18n: {
-		...internationalizationSettingsMain,
-		fallback: {
-			nl: "en",
-		}
+		defaultLocale: defaultLocale,
+		locales: locales,
+		fallback: fallback
 	}
 });

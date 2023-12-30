@@ -1,13 +1,13 @@
 ---
-import Config from '../../astro.config.mjs'
+import { defaultLocale, fallback } from '@src/i18n';
 import {getRelativeLocaleUrl} from "astro:i18n";
 import HeaderLink from './HeaderLink.astro';
-import { siteTitle } from '@root/consts';
-import { headerMenu } from '@root/header';
+import { siteTitle } from '@src/consts';
+import { headerMenu } from '@src/header';
 
 const homeURL = getRelativeLocaleUrl(Astro.currentLocale, "");
 
-const menuLocale =  headerMenu[Astro.currentLocale] ? Astro.currentLocale : Config.i18n.fallback[Astro.currentLocale] || Config.i18n?.defaultLocale
+const menuLocale =  headerMenu[Astro.currentLocale] ? Astro.currentLocale : fallback[Astro.currentLocale] || defaultLocale
 
 const headerMenuItems = headerMenu[menuLocale].items
 
