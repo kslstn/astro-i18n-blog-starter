@@ -1,4 +1,4 @@
-import { defaultLocale, locales } from '@src/i18n';
+import { defaultLocale, locales } from '@src/i18n/i18n';
 
 export function getLocaleFromUrl(url:string) {
   if (url === undefined) return undefined

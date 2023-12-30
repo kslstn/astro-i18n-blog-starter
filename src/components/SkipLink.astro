@@ -1,0 +1,39 @@
+---
+import { uiStrings } from '@src/i18n/ui';
+---
+
+<div class="skip-link-wrapper">
+	<a href="#main" class="skip-link" tabindex="1">{uiStrings.skipLink[Astro.currentLocale]}</a>
+</div>
+
+<style>
+	.skip-link-wrapper{
+		display: flex;
+		justify-content: center;
+		position: absolute;
+		top: -100vh;
+		left: auto;
+		right: auto;
+		width: 100%;
+		opacity: 0;
+		pointer-events: none;
+		transform: translateY(0);
+		transition:
+			top var(--duration-link) linear var(--duration-link),
+			opacity var(--duration-link) ease-in,
+			transform var(--duration-link) ease-in;
+		}
+		.skip-link-wrapper:focus-within{
+			top: 0;
+			opacity: 1;
+			transform: translateY(var(--space-m));
+			transition:
+				opacity var(--duration-link-hover) ease-out,
+				transform var(--duration-link-hover) ease-out;
+		}
+		.skip-link {
+			padding: var(--space-xs);
+			background-color: var(--bg-light);
+			pointer-events: all;
+	}
+</style>

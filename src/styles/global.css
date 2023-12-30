@@ -42,3 +42,23 @@ body,
 :target {
 	scroll-margin-block: 1em;
 }
+
+
+/* Tokens */
+:root{
+	--space-xs: 0.5rem;
+	--space-s: 1rem;
+	--space-m: 2rem;
+
+	--bg-light: white;
+
+	--duration-link: 100ms;
+	--duration-link-hover: 75ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+:root {
+		--duration-link: 5ms;
+		--duration-link-hover: 5ms;
+	}
+}

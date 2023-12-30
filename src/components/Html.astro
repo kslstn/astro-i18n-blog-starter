@@ -1,7 +1,9 @@
 ---
 import Head from '@components/Head.astro';
-const {frontmatter, translationLinks = [], includeCanonicalMeta = true} = Astro.props
-const lang = Astro.currentLocale;
+import SkipLink from '@components/SkipLink.astro';
+const {frontmatter, translationLinks = [], includeCanonicalMeta = true, includeSkipLink = true} = Astro.props
+const mode = import.meta.env.MODE
+const lang = Astro.currentLocale
 ---
 <!doctype html>
 <html lang={lang}>
@@ -9,6 +11,17 @@ const lang = Astro.currentLocale;
     <Head frontmatter={frontmatter} translationLinks={translationLinks} includeCanonicalMeta={includeCanonicalMeta}/>
   </head>
   <body>
+    {includeSkipLink &&
+      <SkipLink />
+    }
 		<slot/>
 	</body>
+  {mode === 'development' &&
+    <script>
+      setTimeout(()=>{
+        const main = document.getElementById('main')
+        if (main === null) window.alert("This template doesn't have a #main element. It's required for the skip link to work.")
+      }, 1000)
+    </script>
+  }
 </html>
