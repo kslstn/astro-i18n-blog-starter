@@ -1,19 +1,25 @@
 ---
-// Shows if there are translations of the page and if so, links to them.
-// A translation is identified by its 'reference' frontmatter value.
+// Create an object with translations of the page.
+// A translation is identified by its 'reference' frontmatter value: pages that have the same value are considered translations.
+// If there are translations of the page, the TranslationsBanner is shown.
+// Because astro.glob() and getCollections are only available inside .astro files, the logic can't be easily moved to utility function.
+// The benefit of having the logic inside this component is that the translations only need to be searched once for all the places where they are used (head and TranslationsBanner).
 
 import { getLocaleFromUrl} from '../i18n/utils';
 import { uiStrings } from '../i18n/ui';
 import { getCollection } from 'astro:content';
+import Html from "./Html.astro";
+import TranslationsBanner from "./TranslationsBanner.astro";
 
-const pageTranslationsAvailableIn = `${uiStrings.pageTranslationsAvailableIn[Astro.currentLocale]} `
-const {reference, collection} = Astro.props
+const
+	{frontmatter, collection} = Astro.props,
+	reference:string = frontmatter.reference;
 
 let translationsAvailable = []
 let translationLinks:[{path: string, locale: string, label: string}?] = []
 
 if (reference){
-	if (collection == 'pages'){
+	if (collection === 'pages'){
 		// The current page is not part of a collection
 		const allPages = await Astro.glob('../pages/**/*.{md,mdx}')
 		translationsAvailable = allPages
@@ -53,19 +59,10 @@ if (reference){
 		}
 	}
 }
-
 ---
-{translationLinks && pageTranslationsAvailableIn &&
-	<aside>
-		<p>
-			{pageTranslationsAvailableIn} {translationLinks.map((translation, index) => (
-				<a href={translation.path} hreflang={translation.locale}>
-					{translation.label}
-				</a>
-				<span>{index < translationLinks.length - 1 ?
-					', ' : ''
-				}</span>
-			))}.
-		</p>
-	</aside>
-}
+<Html frontmatter={frontmatter} translationLinks={translationLinks} />
+	{translationLinks.length > 0 &&
+		<TranslationsBanner translationLinks={translationLinks}/>
+	}
+	<slot/>
+</Html>

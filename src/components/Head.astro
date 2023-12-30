@@ -6,20 +6,27 @@ import '../styles/prose.css';
 import { siteTitle, siteDescription, siteThemeColor } from '@root/consts';
 
 interface Props {
-	title: string;
-	description?: string;
-	image?: string;
+	frontmatter:{
+		title: string;
+		description?: string;
+		image?: string;
+		previewImage?: string;
+	}
+	translationLinks: [{path: string, locale: string, label: string}?]
 }
 
-let { title } = Astro.props
-title = title ? `${title} | ${siteTitle}` : siteTitle
-
-const {description = siteDescription, image = '/blog-placeholder-1.jpg' } = Astro.props,
-	canonicalURL = new URL(Astro.url.pathname, Astro.site),
+const {translationLinks} = Astro.props
+const
 	mode = import.meta.env.MODE,
+	{frontmatter} = Astro.props,
+	title = frontmatter.title ? `${frontmatter.title} | ${siteTitle}` : siteTitle,
+	description = frontmatter.description || siteDescription,
+	previewImage =  frontmatter.previewImage || '/blog-placeholder-1.jpg',
+	canonicalURL = new URL(Astro.url.pathname, Astro.site),
 	faviconIco 			= mode === 'development' ? '/favicon-dev.ico' : '/favicon.ico',
 	faviconSVG 			= mode === 'development' ? '/favicon-dev.svg' : '/favicon.svg',
-	appleTouchIcon	= mode === 'development' ? '/apple-touch-icon-dev.png' : '/apple-touch-icon.png'	
+	appleTouchIcon	= mode === 'development' ? '/apple-touch-icon-dev.png' : '/apple-touch-icon.png';
+
 ---
 
 <!-- Global Metadata -->
@@ -36,6 +43,11 @@ const {description = siteDescription, image = '/blog-placeholder-1.jpg' } = Astr
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
+
+<!-- Translations -->
+{translationLinks.map((translation) => ( 
+	<link rel="alternate" hreflang={translation.locale} href={translation.path}>
+))}
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>
@@ -55,7 +67,7 @@ const {description = siteDescription, image = '/blog-placeholder-1.jpg' } = Astr
 {description &&
 	<meta property="og:description" content={description} />
 }
-<meta property="og:image" content={new URL(image, Astro.url)} />
+<meta property="og:image" content={new URL(previewImage, Astro.url)} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
@@ -64,4 +76,4 @@ const {description = siteDescription, image = '/blog-placeholder-1.jpg' } = Astr
 {description &&
 	<meta property="twitter:description" content={description} />
 }
-<meta property="twitter:image" content={new URL(image, Astro.url)} />
+<meta property="twitter:image" content={new URL(previewImage, Astro.url)} />

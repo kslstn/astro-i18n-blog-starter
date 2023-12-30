@@ -1,17 +1,17 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import Html from "../components/Html.astro";
 import Header from "../components/Header.astro";
 import FormattedDate from "../components/FormattedDate.astro";
-import Translations from "../components/Translations.astro";
+import I18n from "../components/I18n.astro";
 
 type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, pubDate, updatedDate, previewImage, reference } = Astro.props;
+const
+  frontmatter = Astro.props,
+  { title, pubDate, updatedDate, previewImage} = Astro.props;
 ---
 
-<Html title={title} description={description} image={previewImage} />
-  <Translations reference={reference} collection="blog"/>
+<I18n frontmatter={frontmatter} collection="blog">
   <Header />
   <main>
     <article>
@@ -31,9 +31,9 @@ const { title, description, pubDate, updatedDate, previewImage, reference } = As
         </div>
         <h1>{title}</h1>
         <div class="prose">
-					<slot />
-				</div>
+          <slot />
+        </div>
       </div>
     </article>
   </main>
-</Html>
+</I18n>

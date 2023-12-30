@@ -1,21 +1,19 @@
 ---
-import Html from '@components/Html.astro';
+import I18n from "../components/I18n.astro";
 import Header from '@components/Header.astro';
 import FormattedDate from '@components/FormattedDate.astro';
 import { getCollection } from 'astro:content';
 
 const
 	{frontmatter} = Astro.props,
-	title = frontmatter.title,
-	description = frontmatter.description,
-	previewImage = frontmatter.previewImage
+	title = frontmatter.title;
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
 );
 ---
-<Html title={title} description={description} image={previewImage} />
-	<Header />
+<I18n frontmatter={frontmatter} collection="pages">
+  <Header />
 	<main>
 		<header class="prose">
 			<h1>{title}</h1>
@@ -37,4 +35,4 @@ const posts = (await getCollection('blog')).sort(
 			}
 		</ul>
 	</main>
-</Html>
+</I18n>

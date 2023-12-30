@@ -1,21 +1,15 @@
 ---
-import Html from '@components/Html.astro';
 import Header from "../components/Header.astro";
-import Translations from "../components/Translations.astro";
+import I18n from "../components/I18n.astro";
 
-// I think it's weird that this doesn't work: const { title, description, previewImage } = Astro.props;
 const
 	{frontmatter} = Astro.props,
-	title = frontmatter.title,
-	description = frontmatter.description,
-	previewImage = frontmatter.previewImage,
-	reference = frontmatter.reference
+	title = frontmatter.title;
 ---
-<Html title={title} description={description} image={previewImage} />
-	<Translations reference={reference} collection="pages"/>
+<I18n frontmatter={frontmatter} collection="pages">
 	<Header />
 	<main class="prose">
 		<h1>{title}</h1>
 		<slot/>
 	</main>
-</Html>
+</I18n>

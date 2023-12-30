@@ -1,12 +1,12 @@
 ---
 import Head from '@components/Head.astro';
-const {title, description, image} = Astro.props
+const {frontmatter, translationLinks} = Astro.props
 const lang = Astro.currentLocale;
 ---
 <!doctype html>
 <html lang={lang}>
   <head>
-    <Head title={title} description={description} image={image}/>
+    <Head frontmatter={frontmatter} translationLinks={translationLinks} />
   </head>
   <body>
 		<slot/>
