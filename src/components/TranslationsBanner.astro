@@ -1,11 +1,12 @@
 ---
 import { uiStrings } from '../i18n/ui';
+const currentLocale = Astro.currentLocale
 const {translationLinks} = Astro.props
-const pageTranslationsAvailableIn = `${uiStrings.pageTranslationsAvailableIn[Astro.currentLocale]} ` 
+const pageTranslationsAvailableIn = `${uiStrings.pageTranslationsAvailableIn[currentLocale]} ` 
 ---
 
 {pageTranslationsAvailableIn &&
-	<aside>
+	<aside id="translations-banner" class="translations-banner">
 		<p>
 			{pageTranslationsAvailableIn} {translationLinks.map((translation, index) => (
 				<a href={translation.path} hreflang={translation.locale}>
@@ -18,3 +19,14 @@ const pageTranslationsAvailableIn = `${uiStrings.pageTranslationsAvailableIn[Ast
 		</p>
 	</aside>
 }
+
+<style>
+	.translations-banner[aria-hidden="true"]{
+		display: none;
+	}
+</style>
+
+<script define:vars={{currentLocale}}>
+	const banner = document.getElementById('translations-banner')
+	if (currentLocale == window.navigator.language || currentLocale == window.navigator.language.slice(0, 2)) banner.setAttribute("aria-hidden", "true");
+</script>
