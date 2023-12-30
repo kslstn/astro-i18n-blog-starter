@@ -9,6 +9,12 @@ export const headerMenu = {
 			label: 'About'
 		}]
 	},
+	de: {
+		items: [{
+			path: '/de/blog',
+			label: 'Blog'
+		}]
+	},
 	nl: {
 		items: []
 	}

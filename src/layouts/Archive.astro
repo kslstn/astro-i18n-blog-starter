@@ -1,16 +1,19 @@
 ---
+import { getCollection } from 'astro:content';
+import { getLocaleFromUrl} from '@src/i18n/utils';
 import I18n from "@components/I18n.astro";
 import Header from '@components/Header.astro';
 import FormattedDate from '@components/FormattedDate.astro';
-import { getCollection } from 'astro:content';
 
 const
 	{frontmatter} = Astro.props,
 	title = frontmatter.title;
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
-);
+const posts = (await getCollection('blog'))
+	.filter(function(entry){ return getLocaleFromUrl(entry.slug) === Astro.currentLocale })
+	.sort(
+		(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+	);
 ---
 <I18n frontmatter={frontmatter} collection="pages">
   <Header />
