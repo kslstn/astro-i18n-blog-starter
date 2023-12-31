@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
-import { defaultLocale, locales, fallback } from './src/i18n/i18n';
+import { defaultLocale, locales } from './src/i18n/i18n';
 
 const sitemapLocales = Object.fromEntries(locales.map((_, i) => [locales[i], locales[i]])) // Create an object with keys and values based on locales
 
@@ -21,6 +21,5 @@ export default defineConfig({
 	i18n: {
 		defaultLocale: defaultLocale,
 		locales: locales,
-		fallback: fallback
 	}
 });
