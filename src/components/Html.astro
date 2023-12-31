@@ -1,14 +1,16 @@
 ---
 import Head from '@components/Head.astro';
 import SkipLink from '@components/SkipLink.astro';
-const {frontmatter, translationLinks = [], includeCanonicalMeta = true, includeSkipLink = true} = Astro.props
+const {frontmatter, includeCanonicalMeta = true, includeSkipLink = true} = Astro.props
 const mode = import.meta.env.MODE
 const lang = Astro.currentLocale
 ---
 <!doctype html>
 <html lang={lang}>
   <head>
-    <Head frontmatter={frontmatter} translationLinks={translationLinks} includeCanonicalMeta={includeCanonicalMeta}/>
+    <Head frontmatter={frontmatter} includeCanonicalMeta={includeCanonicalMeta}>
+      <slot name="head" />
+    </Head>
   </head>
   <body>
     {includeSkipLink &&

@@ -1,6 +1,10 @@
 export const headerMenu = {
 	en: {
 		items: [{
+			path: '/',
+			label: 'Home'
+		},
+		{
 			path: '/blog',
 			label: 'Blog'
 		},
@@ -11,11 +15,12 @@ export const headerMenu = {
 	},
 	de: {
 		items: [{
+			path: '/de/',
+			label: 'Home'
+		},
+		{
 			path: '/de/blog',
 			label: 'Blog'
 		}]
 	},
-	nl: {
-		items: []
-	}
 };

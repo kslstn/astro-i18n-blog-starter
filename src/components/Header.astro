@@ -1,31 +1,17 @@
 ---
 import { defaultLocale, fallback } from '@src/i18n/i18n';
-import {getRelativeLocaleUrl} from "astro:i18n";
 import HeaderLink from './HeaderLink.astro';
-import { siteTitle } from '@src/consts';
 import { headerMenu } from '@src/header';
 
-const homeURL = getRelativeLocaleUrl(Astro.currentLocale, "");
-
 const menuLocale =  headerMenu[Astro.currentLocale] ? Astro.currentLocale : fallback[Astro.currentLocale] || defaultLocale
-
 const headerMenuItems = headerMenu[menuLocale].items
 
-const { pathname } = Astro.url;
-const homeIsCurrent = pathname === homeURL ? 'page' : '' ;
 ---
 
 <header>
 	<nav>
+		<slot />
 		<ul class="header__list">
-			<li class="header__home-item">
-				<a
-					href={homeURL}
-					aria-current={homeIsCurrent ? homeIsCurrent : undefined}
-				>
-					{siteTitle}
-				</a>
-			</li>
 			{headerMenuItems.map((item) => (
 				<HeaderLink href={item.path}>{item.label}</HeaderLink>
 			))}
@@ -40,8 +26,5 @@ const homeIsCurrent = pathname === homeURL ? 'page' : '' ;
 		gap: 1em;
 		max-width: 100%;
 		overflow-x: auto;
-	}
-	.header__home-item{
-		flex-grow: 1;
 	}
 </style>

@@ -1,5 +1,5 @@
 ---
-slug: /nl/mijn-tweede-post
+slug: nl/mijn-tweede-post
 title: 'Tweede post'
 description: 'Ik ben makelaar'
 pubDate: 'Jul 15 2022'

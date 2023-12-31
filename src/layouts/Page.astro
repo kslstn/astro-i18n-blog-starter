@@ -1,5 +1,4 @@
 ---
-import Header from "@components/Header.astro";
 import I18n from "@components/I18n.astro";
 
 const
@@ -7,7 +6,6 @@ const
 	title = frontmatter.title;
 ---
 <I18n frontmatter={frontmatter} collection="pages">
-	<Header />
 	<main id="main" class="prose">
 		<h1>{title}</h1>
 		<slot/>

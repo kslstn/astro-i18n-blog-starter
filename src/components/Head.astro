@@ -14,13 +14,12 @@ interface Props {
 		previewImage?: string;
 		canonical: string;
 	}
-	translationLinks?: [{path: string, locale: string, label: string}?]
 	includeCanonicalMeta?: boolean;
 }
 
 const
 	mode = import.meta.env.MODE,
-	{frontmatter, includeCanonicalMeta =  true, translationLinks} = Astro.props,
+	{frontmatter, includeCanonicalMeta =  true} = Astro.props,
 	title = frontmatter.title ? `${frontmatter.title} | ${siteTitle}` : siteTitle,
 	description = frontmatter.description || siteDescription,
 	previewImage =  frontmatter.previewImage || '/blog-placeholder-1.jpg',
@@ -43,14 +42,6 @@ const
 <link rel="manifest" href="/manifest.webmanifest">
 
 
-{includeCanonicalMeta &&
-	<!-- Canonical URL -->
-	<link rel="canonical" href={canonicalURL} />
-}
-<!-- Translations -->
-{translationLinks.map((translation) => ( 
-	<link rel="alternate" hreflang={translation.locale} href={translation.path}>
-))}
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>
@@ -58,6 +49,13 @@ const
 {description &&
 	<meta name="description" content={description} />
 }
+
+<!-- Canonical URL and translations-->
+{includeCanonicalMeta &&
+	<link rel="canonical" href={canonicalURL} />
+}
+<slot/>
+
 <!-- Theme color -->
 <meta name="theme-color" content={siteThemeColor}>
 <meta name="msapplication-navbutton-color" content={siteThemeColor}>
