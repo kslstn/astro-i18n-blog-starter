@@ -15,11 +15,10 @@ export async function getStaticPaths() {
   let allTags:any = []
   const posts = (await getCollection('blog'))
   for (let locale of locales) {
-    getTagPath
     const localePosts = posts.filter(function(entry){ return getLocaleFromUrl(entry.slug) === locale })
     const tags = getUniqueTags(localePosts, locale).map(tag=>({
       params: {
-        postsPerTagPath: `${getTagPath(locale, tag.tag)}`
+        blogPostsPerTagPath: `${getTagPath(locale ,tag.tag)}`
       },
       props: {
         title: `${uiStrings.tagHeadingSingular[locale]}: ${tag.tagName}`,

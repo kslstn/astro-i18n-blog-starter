@@ -12,6 +12,7 @@ import Html from "./Html.astro";
 import TranslationsBanner from "@components/TranslationsBanner.astro";
 import TranslationLinks from "@components/TranslationLinks.astro";
 import Header from "@components/Header.astro";
+import { getPostPath } from '@src/utilities/getPostPath';
 
 const
 	{frontmatter, collection} = Astro.props,
@@ -53,7 +54,7 @@ if (reference){
 		for (const slug of translationsSlugs){
 			const locale = getLocaleFromUrl(slug)
 			const link = {
-				path: `/${collection}/${slug}`,
+				path: getPostPath(locale, collection, slug),
 				locale: locale,
 				label: uiStrings[locale][Astro.currentLocale]
 			}

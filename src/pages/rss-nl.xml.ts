@@ -1,16 +1,14 @@
 import rss from '@astrojs/rss';
-import { getCollection } from 'astro:content';
 import { siteTitle, siteDescription } from '../consts';
+import { getPostsToRenderInRSS } from '@utilities/getPostsToRenderInRSS';
 
 export async function GET(context) {
-	const posts = await getCollection('blog');
+	const postsToRender = await getPostsToRenderInRSS(context, 'blog', ['nl'])
+
 	return rss({
 		title: siteTitle,
 		description: siteDescription,
 		site: context.site,
-		items: posts.map((post) => ({
-			...post.data,
-			link: `/blog/${post.slug}/`,
-		})),
+		items: postsToRender,
 	});
 }
