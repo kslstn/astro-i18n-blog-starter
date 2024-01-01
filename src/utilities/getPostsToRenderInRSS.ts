@@ -9,6 +9,10 @@ export async function getPostsToRenderInRSS(context, collection:String, locales:
 		const localePosts = posts
 			.filter(function (entry) { return !entry.secret && !entry.draft })
 			.filter(function (entry) { return getLocaleFromUrl(entry.slug) === locale })
+			.sort(
+				(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+			)
+			.slice(0, 50)
 			.map((post) => ({
 				...post.data,
 				link: getPostPath(locale, collection, post.slug),
