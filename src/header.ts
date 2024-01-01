@@ -9,6 +9,10 @@ export const headerMenu = {
 			label: 'Blog'
 		},
 		{
+			path: '/tag',
+			label: 'Tags'
+		},
+		{
 			path: '/about',
 			label: 'About'
 		}]
@@ -21,6 +25,10 @@ export const headerMenu = {
 		{
 			path: '/de/blog',
 			label: 'Blog'
-		}]
+		},
+		{
+			path: '/de/thema',
+			label: 'Themen'
+		},]
 	},
 };

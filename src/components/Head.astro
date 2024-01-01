@@ -8,11 +8,11 @@ import { siteTitle, siteDescription, siteThemeColor } from '@src/consts';
 
 interface Props {
 	frontmatter:{
-		title: string;
+		title?: string;
 		description?: string;
 		image?: string;
 		previewImage?: string;
-		canonical: string;
+		canonicalURL: string;
 	}
 	includeCanonicalMeta?: boolean;
 }
@@ -20,10 +20,10 @@ interface Props {
 const
 	mode = import.meta.env.MODE,
 	{frontmatter, includeCanonicalMeta =  true} = Astro.props,
-	title = frontmatter.title ? `${frontmatter.title} | ${siteTitle}` : siteTitle,
-	description = frontmatter.description || siteDescription,
-	previewImage =  frontmatter.previewImage || '/blog-placeholder-1.jpg',
-	canonicalURL = new URL(frontmatter.canonical || Astro.url.pathname, Astro.site),
+	title = frontmatter?.title ? `${frontmatter.title} | ${siteTitle}` : siteTitle,
+	description = frontmatter?.description || siteDescription,
+	previewImage =  frontmatter?.previewImage || '/blog-placeholder-1.jpg',
+	canonicalURL = new URL(frontmatter?.canonicalURL || Astro.url.pathname, Astro.site),
 	faviconIco 			= mode === 'development' ? '/favicon-dev.ico' : '/favicon.ico',
 	faviconSVG 			= mode === 'development' ? '/favicon-dev.svg' : '/favicon.svg',
 	appleTouchIcon	= mode === 'development' ? '/apple-touch-icon-dev.png' : '/apple-touch-icon.png';

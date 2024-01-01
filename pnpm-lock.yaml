@@ -20,6 +20,9 @@ dependencies:
   astro:
     specifier: ^4.0.8
     version: 4.0.8
+  github-slugger:
+    specifier: ^2.0.0
+    version: 2.0.0
 
 packages:
 

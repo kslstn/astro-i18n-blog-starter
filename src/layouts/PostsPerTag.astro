@@ -1,0 +1,25 @@
+---
+import { getCollection } from 'astro:content';
+import Page from '@layouts/Page.astro'
+import {getPostsByTag} from '@utilities/tags';
+
+export interface Props {
+  frontmatter: any; 
+  tag: string;
+  collection: string;
+}
+
+const {frontmatter, collection } = Astro.props;
+const posts = await getCollection(collection);
+const filteredPosts = getPostsByTag(posts, frontmatter.tag, Astro.currentLocale);
+---
+
+<Page {frontmatter}>
+  <ul>
+    {filteredPosts.map(({ data, slug }) => (
+      <li>
+        <a href={`/blog/${slug}`}>{data.title}</a>
+      </li>
+    ))}
+  </ul>
+</Page>

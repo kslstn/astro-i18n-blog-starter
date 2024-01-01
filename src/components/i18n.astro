@@ -5,7 +5,7 @@
 // Because astro.glob() and getCollections are only available inside .astro files, the logic can't be easily moved to utility function.
 // The benefit of having the logic inside this component is that the translations only need to be searched once for all the places where they are used (head and TranslationsBanner).
 
-import { getLocaleFromUrl} from '@src/i18n/utils';
+import { getLocaleFromUrl } from '@src/i18n/utils';
 import { uiStrings } from '@src/i18n/ui';
 import { getCollection } from 'astro:content';
 import Html from "./Html.astro";
@@ -15,7 +15,7 @@ import Header from "@components/Header.astro";
 
 const
 	{frontmatter, collection} = Astro.props,
-	reference:string = frontmatter.reference;
+	reference:string = frontmatter?.reference || '';
 
 let translationsAvailable = []
 let translationLinks:[{path: string, locale: string, label: string}?] = []

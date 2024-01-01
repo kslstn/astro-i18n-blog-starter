@@ -1,0 +1,17 @@
+---
+const {tags} = Astro.props
+import { getTagPath } from '@utilities/tags';
+import {uiStrings} from "@i18n/ui";
+
+const uiString = tags.length === 1 ? uiStrings.tagHeadingSingular[Astro.currentLocale] : uiStrings.tagHeadingPlural[Astro.currentLocale] 
+---
+
+<p>
+	{uiString}:
+	{tags.map((tag, index) => (
+		<a href={`${getTagPath(Astro.currentLocale, tag)}`}>{tag}</a>
+		<span>{index < tags.length - 1 ?
+			', ' : ''
+		}</span>
+	))}.
+</p>

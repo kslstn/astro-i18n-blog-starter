@@ -3,11 +3,13 @@ import I18n from "@components/I18n.astro";
 
 const
 	{frontmatter} = Astro.props,
-	title = frontmatter.title;
+	title = frontmatter?.title || '';
 ---
 <I18n frontmatter={frontmatter} collection="pages">
 	<main id="main" class="prose">
-		<h1>{title}</h1>
+		{title &&
+			<h1>{title}</h1>
+		}
 		<slot/>
 	</main>
 </I18n>

@@ -23,5 +23,15 @@ export const uiStrings = {
 		en: 'Dutch',
 		de: 'niederländisch',
 		nl: 'Nederlands'
-	}
+	},
+	tagHeadingSingular: {
+		en: 'Tag',
+		de: 'Thema',
+		nl: 'Onderwerp'
+	},
+	tagHeadingPlural: {
+		en: 'Tags',
+		de: 'Themen',
+		nl: 'Onderwerpen'
+	},
 };

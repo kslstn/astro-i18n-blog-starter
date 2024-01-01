@@ -1,0 +1,34 @@
+---
+import { getCollection } from "astro:content";
+import { getUniqueTags, getTagPath} from '@utilities/tags';
+import { locales } from '@i18n/i18n';
+import { uiStrings} from '@i18n/ui';
+import { getLocaleFromUrl} from '@i18n/utils';
+import PostsPerTag from "../layouts/PostsPerTag.astro";
+
+interface Tag {
+	tag: string;
+  tagName: string;
+}
+
+export async function getStaticPaths() {
+  let allTags:any = []
+  const posts = (await getCollection('blog'))
+  for (let locale of locales) {
+    getTagPath
+    const localePosts = posts.filter(function(entry){ return getLocaleFromUrl(entry.slug) === locale })
+    const tags = getUniqueTags(localePosts, locale).map(tag=>({
+      params: {
+        postsPerTagPath: `${getTagPath(locale, tag.tag)}`
+      },
+      props: {
+        title: `${uiStrings.tagHeadingSingular[locale]}: ${tag.tagName}`,
+        tag: tag.tag,
+      }
+    }))
+    allTags.push(...tags)
+  }
+  return allTags
+}
+---
+<PostsPerTag frontmatter={Astro.props} collection="blog"/>

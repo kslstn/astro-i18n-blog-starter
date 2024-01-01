@@ -1,0 +1,32 @@
+---
+import { getCollection } from "astro:content";
+import { getUniqueTags} from '@utilities/tags';
+import { defaultLocale, locales} from '@i18n/i18n';
+import { uiStrings} from '@i18n/ui';
+import { slugifyStr } from '@utilities/slugify';
+import Page from '@layouts/Page.astro'
+
+const {frontmatter} = Astro.props
+
+interface Tag {
+	tag: string;
+  tagName: string;
+}
+
+const posts = await getCollection(frontmatter.collection);
+const tags = getUniqueTags(posts, Astro.currentLocale).filter((tag) => {
+	return tag.tagName !== 'other'
+})
+const localePath = Astro.currentLocale === defaultLocale ? '' : `/${Astro.currentLocale}`
+const pathStart = `${localePath}/${slugifyStr(uiStrings.tagHeadingSingular[Astro.currentLocale])}`
+
+---
+<Page {frontmatter}>
+	<ul>
+		{tags.map(({ tag, tagName }) => 
+			<li>
+				<a href={`${pathStart}/${tag}`}>{tagName}</a>
+			</li>
+		)}
+	</ul>
+</Page>

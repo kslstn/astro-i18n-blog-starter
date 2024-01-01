@@ -4,3 +4,6 @@
 export const siteTitle = 'Astro Blog Starter';
 export const siteDescription = 'All the basics for a brand-new blog!';
 export const siteThemeColor = '#27AE60'
+export const pagination = {
+	entriesPerPage: 12,
+}
