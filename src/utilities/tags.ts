@@ -30,7 +30,7 @@ export const getPostsByTag = (posts: CollectionEntry<'blog'>[], tag: string, loc
 
 export const getTagPath = (locale:string, tag:string)=>{
   const localePath = locale === defaultLocale ? '' : `/${locale}`
-  const tagDirectoryName = slugifyStr(uiStrings.tagHeadingSingular[locale])
+  const tagDirectoryName = slugifyStr(uiStrings.tagDirectoryName[locale])
   const tagSlugified = slugifyStr(tag)
   return `${localePath}/${tagDirectoryName}/${tagSlugified}`
 }

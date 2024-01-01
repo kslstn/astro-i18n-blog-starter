@@ -24,6 +24,12 @@ export const uiStrings = {
 		de: 'niederländisch',
 		nl: 'Nederlands'
 	},
+	tagDirectoryName: {
+		// Careful: these define the paths for the tag pages
+		en: 'tag',
+		de: 'thema',
+		nl: 'onderwerp'
+	},
 	tagHeadingSingular: {
 		en: 'Tag',
 		de: 'Thema',
