@@ -7,12 +7,12 @@
 
 import { getLocaleFromUrl } from '@src/i18n/utils';
 import { uiStrings } from '@src/i18n/ui';
-import { getCollection } from 'astro:content';
 import Html from "./Html.astro";
 import TranslationsBanner from "@components/TranslationsBanner.astro";
 import TranslationLinks from "@components/TranslationLinks.astro";
 import Header from "@components/Header.astro";
-import { getPostPath } from '@src/utilities/getPostPath';
+import getPostPath from '@utilities/getPostPath';
+import getPublishedPosts from '@utilities/getPublishedPosts';
 
 const
 	{frontmatter, collection} = Astro.props,
@@ -44,10 +44,8 @@ if (reference){
 	}
 	else{
 		// The current page is part of a collection
-		const filteredEntries = await getCollection(collection, (entry) => {
-			return entry.data.reference === reference
-		});
-		const translationsSlugs = filteredEntries
+		const translationsSlugs = (await getPublishedPosts('', collection, ''))
+			.filter((entry)=> entry.data.reference === reference)
 			.filter(function(entry){ return getLocaleFromUrl(entry.slug) !== Astro.currentLocale })
 			.map(entry => (entry.slug))
 

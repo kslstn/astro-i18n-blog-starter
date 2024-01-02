@@ -1,9 +1,7 @@
 ---
-import { getCollection } from "astro:content";
 import { getUniqueTags, getTagPath} from '@utilities/tags';
 import { locales } from '@i18n/i18n';
 import { uiStrings} from '@i18n/ui';
-import { getLocaleFromUrl} from '@i18n/utils';
 import PostsPerTag from "../layouts/PostsPerTag.astro";
 
 interface Tag {
@@ -13,10 +11,8 @@ interface Tag {
 
 export async function getStaticPaths() {
   let allTags:any = []
-  const posts = (await getCollection('blog'))
   for (let locale of locales) {
-    const localePosts = posts.filter(function(entry){ return getLocaleFromUrl(entry.slug) === locale })
-    const tags = getUniqueTags(localePosts, locale).map(tag=>({
+    const tags = (await getUniqueTags('blog', locale)).map(tag=>({
       params: {
         blogPostsPerTagPath: `${getTagPath(locale ,tag.tag)}`
       },

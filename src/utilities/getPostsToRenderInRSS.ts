@@ -1,23 +1,12 @@
-import { getCollection } from 'astro:content';
-import { getLocaleFromUrl } from '@i18n/utils';
-import { getPostPath } from '@utilities/getPostPath';
+import getPostPath from '@utilities/getPostPath';
+import getPublishedPosts from '@utilities/getPublishedPosts';
 
-export async function getPostsToRenderInRSS(context, collection:String, locales:Array) {
-	const posts = await getCollection(collection);
-	let postsToRender = []
-	for (let locale of locales) {
-		const localePosts = posts
-			.filter(function (entry) { return !entry.secret })
-			.filter(function (entry) { return getLocaleFromUrl(entry.slug) === locale })
-			.sort(
-				(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-			)
-			.slice(0, 50)
-			.map((post) => ({
-				...post.data,
-				link: getPostPath(locale, collection, post.slug),
-			}));
-		postsToRender.push(...localePosts)
-	}
-	return postsToRender
+export async function getPostsToRenderInRSS(context, locale:String, collection:String) {
+	const posts = (await getPublishedPosts(locale, collection))
+		.slice(0, 50)
+		.map((post) => ({
+			...post.data,
+			link: getPostPath(locale, collection, post.slug),
+		}));
+	return posts
 }

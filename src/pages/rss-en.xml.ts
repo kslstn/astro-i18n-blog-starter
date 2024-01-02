@@ -3,7 +3,7 @@ import { siteTitle, siteDescription } from '../consts';
 import { getPostsToRenderInRSS } from '@utilities/getPostsToRenderInRSS';
 
 export async function GET(context) {
-	const postsToRender = await getPostsToRenderInRSS(context, 'blog', ['en'])
+	const postsToRender = await getPostsToRenderInRSS(context, 'en', 'blog')
 
 	return rss({
 		title: siteTitle,

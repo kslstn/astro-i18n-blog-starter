@@ -3,11 +3,12 @@ import { type CollectionEntry, getCollection } from 'astro:content';
 import { locales } from '@i18n/i18n';
 import { getLocaleFromUrl} from '@i18n/utils';
 import Post from '@layouts/Post.astro';
-import { getPostPath } from '@src/utilities/getPostPath';
+import getPostPath from '@utilities/getPostPath';
+import getPublishedPosts from '@utilities/getPublishedPosts';
 
 export async function getStaticPaths() {
 	const collection = 'blog'
-	const posts = await getCollection(collection);
+	const posts = await getPublishedPosts('', collection, '');
 	let postsToRender = []
   for (let locale of locales) {
     const localePosts = posts

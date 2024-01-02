@@ -1,8 +1,7 @@
 ---
-import { getCollection } from 'astro:content';
 import Page from '@layouts/Page.astro'
 import { getPostsByTag } from '@utilities/tags';
-import { getPostPath } from '@utilities/getPostPath';
+import getPostPath from '@utilities/getPostPath';
 
 export interface Props {
   frontmatter: any; 
@@ -11,8 +10,7 @@ export interface Props {
 }
 
 const {frontmatter, collection } = Astro.props;
-const posts = await getCollection(collection);
-const filteredPosts = getPostsByTag(posts, frontmatter.tag, Astro.currentLocale);
+const filteredPosts = await getPostsByTag('blog', frontmatter.tag, Astro.currentLocale);
 ---
 
 <Page {frontmatter}>
