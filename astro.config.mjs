@@ -12,6 +12,7 @@ export default defineConfig({
 	integrations: [
 		mdx(),
 		sitemap({
+			filter: (page) => page.secret !== true,
 			i18n: {
 				defaultLocale: defaultLocale,
 				locales: sitemapLocales,
