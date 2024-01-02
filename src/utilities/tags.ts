@@ -10,7 +10,6 @@ export const getUniqueTags = (posts,  locale:string = '') => {
   
 	const filteredPosts = posts
 		.filter(function(entry){ return locale === '' ? true : getLocaleFromUrl(entry.slug) === locale })
-		.filter(({ data }) => !data.draft)
 		.filter(({ data }) => !data.secret)
 	
   const tags = filteredPosts

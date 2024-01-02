@@ -7,7 +7,7 @@ export async function getPostsToRenderInRSS(context, collection:String, locales:
 	let postsToRender = []
 	for (let locale of locales) {
 		const localePosts = posts
-			.filter(function (entry) { return !entry.secret && !entry.draft })
+			.filter(function (entry) { return !entry.secret })
 			.filter(function (entry) { return getLocaleFromUrl(entry.slug) === locale })
 			.sort(
 				(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
