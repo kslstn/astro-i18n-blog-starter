@@ -9,6 +9,7 @@ const tags = (await getUniqueTags(frontmatter.collection, Astro.currentLocale)).
 })
 ---
 <Page {frontmatter}>
+	<slot/>
 	<ul>
 		{tags.map(({ tag, tagName }) => 
 			<li>

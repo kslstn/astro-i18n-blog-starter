@@ -2,7 +2,8 @@
 import getPublishedPosts from '@utilities/getPublishedPosts';
 import I18n from "@components/I18n.astro";
 import FormattedDate from '@components/FormattedDate.astro';
-import getPostPath from '@src/utilities/getPostPath';
+import getPostPath from '@utilities/getPostPath';
+import {getPostDescription} from '@utilities/getPageDescription';
 
 const
 	{frontmatter} = Astro.props,
@@ -11,26 +12,27 @@ const
 
 const posts:Array<any> = await getPublishedPosts(Astro.currentLocale, collection)
 ---
-<I18n frontmatter={frontmatter} collection="pages">
+<I18n {frontmatter} collection="pages">
 	<main id="main">
 		<header class="prose">
 			<h1>{title}</h1>
 			<slot/>
 		</header>
 		<ul>
-			{
-				posts.map((post) => (
-					<li>
-						<a href={`${getPostPath(Astro.currentLocale, collection, post.slug)}`}>
-							<img width={720} height={360} src={post.data.previewImage} alt="" />
-							<h2 class="title">{post.data.title}</h2>
-							<p class="date">
-								<FormattedDate date={post.data.pubDate} />
-							</p>
-						</a>
-					</li>
-				))
-			}
+			{posts.map((post) => (
+				<li>
+					<a href={`${getPostPath(Astro.currentLocale, collection, post.slug)}`}>
+						<img width={720} height={360} src={post.data.previewImage} alt="" />
+						<h2 class="title">{post.data.title}</h2>
+						<p class="date">
+							<FormattedDate date={post.data.pubDate} />
+						</p>
+					</a>
+					<blockquote cite={`${getPostPath(Astro.currentLocale, collection, post.slug)}`}>
+						{getPostDescription(post)}
+					</blockquote>
+				</li>
+			))}
 		</ul>
 	</main>
 </I18n>

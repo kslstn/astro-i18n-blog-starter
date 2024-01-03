@@ -15,8 +15,8 @@ import getPostPath from '@utilities/getPostPath';
 import getPublishedPosts from '@utilities/getPublishedPosts';
 
 const
-	{frontmatter, collection} = Astro.props,
-	reference:string = frontmatter?.reference || '';
+{frontmatter, collection} = Astro.props,
+reference:string = frontmatter?.reference || '';
 
 let translationsAvailable = []
 let translationLinks:[{path: string, locale: string, label: string}?] = []
@@ -62,7 +62,7 @@ if (reference){
 }
 ---
 
-<Html frontmatter={frontmatter}>
+<Html {frontmatter}>
 	{translationLinks.map((translation) => ( 
 		<link rel="alternate" hreflang={translation.locale} href={translation.path} slot="head" />
 	))}

@@ -1,4 +1,3 @@
-import { getCollection } from "astro:content";
 import getPublishedPosts from '@utilities/getPublishedPosts';
 import { slugifyStr, slugifyAll } from '@utilities/slugify';
 import { defaultLocale } from '@i18n/i18n';

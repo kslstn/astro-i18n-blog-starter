@@ -4,7 +4,6 @@ import FormattedDate from "@components/FormattedDate.astro";
 import PostTags from "@components/PostTags.astro";
 import I18n from "@components/I18n.astro";
 
-
 type Props = CollectionEntry<"blog">["data"];
 
 const
@@ -13,7 +12,7 @@ const
   realTags = tags.filter((tag)=>{return tag !== 'other'})
 ---
 
-<I18n frontmatter={frontmatter} collection="blog">
+<I18n {frontmatter} collection="blog">
   <main id="main" tabindex=”1”>
     <article>
       <header>

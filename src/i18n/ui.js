@@ -40,4 +40,9 @@ export const uiStrings = {
 		de: 'Themen',
 		nl: 'Onderwerpen'
 	},
+	postsPerTagPageDescription: {
+		en: "Posts about",
+		de: 'Posts zum Thema',
+		nl: 'Posts met onderwerp'
+	},
 };

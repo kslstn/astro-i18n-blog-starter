@@ -1,21 +1,28 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { type CollectionEntry } from 'astro:content';
 import { locales } from '@i18n/i18n';
 import { getLocaleFromUrl} from '@i18n/utils';
 import Post from '@layouts/Post.astro';
 import getPostPath from '@utilities/getPostPath';
 import getPublishedPosts from '@utilities/getPublishedPosts';
+import {getPostDescription} from '@utilities/getPageDescription';
 
 export async function getStaticPaths() {
 	const collection = 'blog'
 	const posts = await getPublishedPosts('', collection, '');
 	let postsToRender = []
+
+	const completeProps = function(post){
+		post.data.description = getPostDescription(post)
+		return post
+	}
+
   for (let locale of locales) {
     const localePosts = posts
 			.filter(function(entry){ return getLocaleFromUrl(entry.slug) === locale })
 			.map((post) => ({
 				params: { blogPostPath: `${getPostPath(locale, collection, post.slug)}` },
-				props: post,
+				props: completeProps(post),
 			}));
 		postsToRender.push(...localePosts)
 	}

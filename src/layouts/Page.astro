@@ -5,7 +5,7 @@ const
 	{frontmatter} = Astro.props,
 	title = frontmatter?.title || '';
 ---
-<I18n frontmatter={frontmatter} collection="pages">
+<I18n {frontmatter} collection="pages">
 	<main id="main" class="prose">
 		{title &&
 			<h1>{title}</h1>

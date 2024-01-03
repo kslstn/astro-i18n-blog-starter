@@ -1,6 +1,6 @@
 ---
 title: 'Third post'
-description: 'Lorem ipsum dolor sit amet'
+description: ''
 pubDate: 'Jul 15 2022'
 previewImage: '/blog-placeholder-2.jpg'
 tags: 

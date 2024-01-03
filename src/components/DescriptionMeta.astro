@@ -1,0 +1,14 @@
+---
+import {truncateDescription, getPageDescription} from '@utilities/getPageDescription'
+let {description, file} = Astro.props
+
+if (!description){
+	const page = (await Astro.glob('../**/*.{md,mdx}')).find(page => page.file === file)
+	description = getPageDescription(page)
+}
+else description =  truncateDescription(description)
+if (!description) console.warn("⚠️ This page doesn't have a description.")
+---
+{description &&
+	<meta name="description" content={description} />
+}

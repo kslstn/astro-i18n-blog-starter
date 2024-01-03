@@ -1,10 +1,11 @@
 ---
+import { siteTitle, siteThemeColor } from '@src/consts';
+import DescriptionMeta from './DescriptionMeta.astro';
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
 import '@exampledev/new.css'
 import '../styles/prose.css';
-import { siteTitle, siteDescription, siteThemeColor } from '@src/consts';
 
 interface Props {
 	frontmatter:{
@@ -13,15 +14,18 @@ interface Props {
 		image?: string;
 		previewImage?: string;
 		canonicalURL: string;
+		file: string;
 	}
 	includeCanonicalMeta?: boolean;
 }
 
 const
 	mode = import.meta.env.MODE,
-	{frontmatter, includeCanonicalMeta =  true} = Astro.props,
+	{frontmatter, includeCanonicalMeta = true} = Astro.props,
 	title = frontmatter?.title ? `${frontmatter.title} | ${siteTitle}` : siteTitle,
-	description = frontmatter?.description || siteDescription,
+	// description = frontmatter.description || siteDescription,
+	description =  frontmatter?.description,
+	file =  frontmatter?.file,
 	previewImage =  frontmatter?.previewImage || '/blog-placeholder-1.jpg',
 	canonicalURL = new URL(frontmatter?.canonicalURL || Astro.url.pathname, Astro.site),
 	faviconIco 			= mode === 'development' ? '/favicon-dev.ico' : '/favicon.ico',
@@ -46,9 +50,8 @@ const
 <!-- Primary Meta Tags -->
 <title>{title}</title>
 <meta name="title" content={title} />
-{description &&
-	<meta name="description" content={description} />
-}
+
+<DescriptionMeta {description} {file} />
 
 <!-- Canonical URL and translations-->
 {includeCanonicalMeta &&
