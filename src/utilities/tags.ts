@@ -1,7 +1,6 @@
 import getPublishedPosts from '@utilities/getPublishedPosts';
 import { slugifyStr, slugifyAll } from '@utilities/slugify';
-import { defaultLocale } from '@i18n/i18n';
-import { uiStrings} from '@i18n/ui';
+import { defaultLocale, tagDirectoryNames } from '@i18n/i18n';
 
 export async function getUniqueTags(collection, locale:string = ''){
   type tags = [{
@@ -26,7 +25,7 @@ export async function getPostsByTag(collection:string, tag:string, locale:string
 
 export const getTagPath = (locale:string, tag:string)=>{
   const localePath = locale === defaultLocale ? '' : `/${locale}`
-  const tagDirectoryName = slugifyStr(uiStrings.tagDirectoryName[locale])
+  const tagDirectoryName = slugifyStr(tagDirectoryNames[locale])
   const tagSlugified = slugifyStr(tag)
   return `${localePath}/${tagDirectoryName}/${tagSlugified}`
 }
