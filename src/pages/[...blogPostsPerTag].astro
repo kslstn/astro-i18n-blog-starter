@@ -2,31 +2,31 @@
 import { getUniqueTags, getTagPath} from '@utilities/tags';
 import { locales } from '@i18n/i18n';
 import { uiStrings } from '@i18n/ui';
-import PostsPerTag from "../layouts/PostsPerTag.astro";
+import PostsPerTag from "@layouts/PostsPerTag.astro";
 
 interface Tag {
-	tag: string;
-  tagName: string;
+	slugified: string;
+  name: string;
 }
 
 export async function getStaticPaths() {
   let allTags:any = []
-  const getDescription = function(tagName, locale){
-    const description = `${uiStrings.postsPerTagPageDescription[locale]} ${tagName}.`
+  const getDescription = function(name, locale){
+    const description = `${uiStrings.postsPerTagPageDescription[locale]} ${name}.`
     return description
   }
   for (let locale of locales) {
     const tags = (await getUniqueTags('blog', locale))
-    .filter((tag)=>{return tag.tag !== 'other'})
+    .filter((tag)=>{return tag.slugified !== 'other'})
     .map(tag=>(  
       {
         params: {
-          blogPostsPerTagPath: `${getTagPath(locale ,tag.tag)}`
+          blogPostsPerTag: `${getTagPath(locale, tag.slugified)}`
         },
         props: {
-          title: `${uiStrings.tagHeadingSingular[locale]}: ${tag.tagName}`,
-          description: getDescription(tag.tagName, locale),
-          tag: tag.tag,
+          title: `${uiStrings.tagHeadingSingular[locale]}: ${tag.name}`,
+          description: getDescription(tag.name, locale),
+          tag: tag.slugified,
         }
       }
     ))

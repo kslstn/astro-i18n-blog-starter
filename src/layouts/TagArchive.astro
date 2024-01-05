@@ -1,19 +1,19 @@
 ---
-import { getUniqueTags} from '@utilities/tags';
+import { getUniqueTags } from '@utilities/tags';
 import { getTagPath } from '@utilities/tags';
 import Page from '@layouts/Page.astro'
 
 const {frontmatter} = Astro.props
 const tags = (await getUniqueTags(frontmatter.collection, Astro.currentLocale)).filter((tag) => {
-	return tag.tagName !== 'other'
+	return tag.slugified !== 'other'
 })
 ---
 <Page {frontmatter}>
 	<slot/>
 	<ul>
-		{tags.map(({ tag, tagName }) => 
+		{tags.map(({ slugified, name }) => 
 			<li>
-				<a href={getTagPath(Astro.currentLocale, tag)}>{tagName}</a>
+				<a href={getTagPath(Astro.currentLocale, slugified)}>{name}</a>
 			</li>
 		)}
 	</ul>
