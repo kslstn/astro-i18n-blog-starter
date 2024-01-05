@@ -1,5 +1,6 @@
 ---
 title: 'Zweiter Post'
+author: fatima-rodriguez
 description: 'Damit Ihr indess erkennt'
 pubDate: 'Jul 22 2022'
 previewImage: '/blog-placeholder-4.jpg'

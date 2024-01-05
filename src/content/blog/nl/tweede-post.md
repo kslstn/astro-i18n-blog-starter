@@ -1,6 +1,7 @@
 ---
 slug: nl/mijn-tweede-post
 title: 'Tweede post'
+author: 'Ashley Devi'
 description: 'Ik ben makelaar'
 pubDate: 'Jul 15 2022'
 previewImage: '/blog-placeholder-3.jpg'

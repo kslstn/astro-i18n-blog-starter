@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import Byline from "@components/Byline.astro";
 import FormattedDate from "@components/FormattedDate.astro";
 import PostTags from "@components/PostTags.astro";
 import I18n from "@components/I18n.astro";
@@ -8,8 +9,8 @@ type Props = CollectionEntry<"blog">["data"];
 
 const
   frontmatter = Astro.props,
-  { title, pubDate, updatedDate, previewImage, tags} = Astro.props,
-  realTags = tags.filter((tag)=>{return tag !== 'other'})
+  { title, pubDate, updatedDate, previewImage, tags, author} = Astro.props,
+  realTags = tags.filter((tag)=>{return tag !== 'other'});
 ---
 
 <I18n {frontmatter} collection="blog">
@@ -19,15 +20,8 @@ const
         <div class="hero-image">
           {previewImage && <img width={1020} height={510} src={previewImage} alt="" />}
         </div>
-        <FormattedDate date={pubDate} />
-        {
-          updatedDate && (
-            <p class="last-updated-on">
-              Last updated on <FormattedDate date={updatedDate} />
-            </p>
-          )
-        }
         <h1>{title}</h1>
+        <Byline personID={author} {pubDate} {updatedDate}>
       </header>
       <div class="prose">
         <slot />

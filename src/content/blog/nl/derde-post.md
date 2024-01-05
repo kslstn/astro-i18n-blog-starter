@@ -1,7 +1,8 @@
 ---
 title: 'Derde post'
+author: 'david-mueller'
 description: 'Lorem ipsum dolor sit amet'
-pubDate: 'Jul 08 2022'
+pubDate: 'Jul 28 2022'
 previewImage: '/blog-placeholder-3.jpg'
 reference: third-post
 tags: [Mattis, Puur]
