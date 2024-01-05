@@ -1,6 +1,6 @@
 import getPagePath from '@src/utilities/getPagePath';
 import getPublishedPosts from '@utilities/getPublishedPosts';
-import { slugifyStr, slugifyAll } from '@utilities/slugify';
+import slugify from '@sindresorhus/slugify';
 import { tagDirectoryNames } from '@i18n/i18n';
 
 export async function getUniqueTags(collection, locale:string = ''){
@@ -13,17 +13,17 @@ export async function getUniqueTags(collection, locale:string = ''){
   
   const tags = (await getPublishedPosts(locale, collection, ''))
     .flatMap(post => post.data.tags)
-    .map(tag => ({ slugified: slugifyStr(tag), name: tag }))
+    .map(tag => ({ slugified: slugify(tag), name: tag }))
     .filter((value, index, self) =>
       self.findIndex(tag => tag.slugified === value.slugified) === index
     )
     .sort((tagA, tagB) => tagA.slugified.localeCompare(tagB.slugified));
-
+    
 	return tags;
 };
 
 export async function getPostsByTag(collection:string, tag:string, locale:string) {
-  return (await getPublishedPosts(locale, collection)).filter(post => slugifyAll(post.data.tags).includes(slugifyStr(tag)))
+  return (await getPublishedPosts(locale, collection)).filter(post => post.data.tags.map(item => {return slugify(item)}).includes(slugify(tag)))
 }
 
 export const getTagPath = (locale:string, tag:string)=>{
