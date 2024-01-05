@@ -8,6 +8,7 @@ export async function getPostsToRenderInRSS(context, locale:string, collection:s
 		.map((post) => ({
 			...post.data,
 			link: getPostPath(locale || getLocaleFromUrl(post.slug), collection, post.slug),
+			body: post.body
 		}));
 	return posts
 }

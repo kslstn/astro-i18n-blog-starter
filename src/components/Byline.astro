@@ -1,14 +1,14 @@
 ---
 import FormattedDate from '@components/FormattedDate.astro'
 import { people, getPersonPath } from '@utilities/people'
-const { personID  = '', pubDate, updatedDate } = Astro.props
-let person = people.find(person => {return person.id === personID})
+const { authorFullName  = '', pubDate, updatedDate } = Astro.props
+let person = people.find(person => {return person.fullName === authorFullName})
 const hasAuthorLink = typeof person === 'object'
 ---
 <p>
-	{personID &&
+	{authorFullName &&
 		<span>{ hasAuthorLink && <a href={getPersonPath(Astro.currentLocale, person.id)}>{person.fullName}</a> }</span>
-		<span>{ !hasAuthorLink && <span>{personID}</span> }</span>
+		<span>{ !hasAuthorLink && <span>{authorFullName}</span> }</span>
 		<span>, </span>
 	}
 	<FormattedDate date={pubDate} />
