@@ -1,7 +1,7 @@
 ---
 import { type CollectionEntry } from 'astro:content';
 import { locales } from '@i18n/i18n';
-import { getLocaleFromUrl} from '@i18n/utils';
+import { getLocaleFromUrl} from '@i18n/utilities';
 import Post from '@layouts/Post.astro';
 import getPostPath from '@utilities/getPostPath';
 import getPublishedPosts from '@utilities/getPublishedPosts';
@@ -36,4 +36,4 @@ const { Content } = await post.render();
 
 <Post {...post.data}>
 	<Content />
-</Post>
+</Post

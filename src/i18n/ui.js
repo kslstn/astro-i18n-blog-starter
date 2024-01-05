@@ -39,4 +39,9 @@ export const uiStrings = {
 		de: 'Posts zum Thema',
 		nl: 'Posts met onderwerp'
 	},
+	personProfilePageDescription: {
+		en: "Profile of",
+		de: 'Profil von',
+		nl: 'Profiel van'
+	},
 };

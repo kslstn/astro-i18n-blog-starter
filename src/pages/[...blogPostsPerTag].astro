@@ -3,6 +3,7 @@ import { getUniqueTags, getTagPath} from '@utilities/tags';
 import { locales } from '@i18n/i18n';
 import { uiStrings } from '@i18n/ui';
 import PostsPerTag from "@layouts/PostsPerTag.astro";
+import { truncateDescription } from "@utilities/getPageDescription";
 
 interface Tag {
 	slugified: string;
@@ -10,9 +11,9 @@ interface Tag {
 }
 
 export async function getStaticPaths() {
-  let allTags:any = []
-  const getDescription = function(name, locale){
-    const description = `${uiStrings.postsPerTagPageDescription[locale]} ${name}.`
+  let allPostsPerTagPages:any = []
+  const getDescription = function(locale, name){
+    const description = truncateDescription(`${uiStrings.postsPerTagPageDescription[locale]} ${name}.`)
     return description
   }
   for (let locale of locales) {
@@ -30,9 +31,9 @@ export async function getStaticPaths() {
         }
       }
     ))
-    allTags.push(...tags)
+    allPostsPerTagPages.push(...tags)
   }
-  return allTags
+  return allPostsPerTagPages
 }
 ---
 <PostsPerTag frontmatter={Astro.props} collection="blog"/>

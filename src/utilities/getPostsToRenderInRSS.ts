@@ -1,6 +1,6 @@
 import getPostPath from '@utilities/getPostPath';
 import getPublishedPosts from '@utilities/getPublishedPosts';
-import {getLocaleFromUrl} from '@i18n/utils';
+import {getLocaleFromUrl} from '@i18n/utilities';
 
 export async function getPostsToRenderInRSS(context, locale:string, collection:string) {
 	const posts = (await getPublishedPosts(locale, collection))

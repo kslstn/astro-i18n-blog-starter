@@ -1,7 +1,7 @@
 import getPagePath from '@src/utilities/getPagePath';
 import getPublishedPosts from '@utilities/getPublishedPosts';
 import slugify from '@sindresorhus/slugify';
-import { tagDirectoryNames } from '@i18n/i18n';
+import { directoryNames } from '@i18n/i18n';
 
 export async function getUniqueTags(collection, locale:string = ''){
   
@@ -27,6 +27,6 @@ export async function getPostsByTag(collection:string, tag:string, locale:string
 }
 
 export const getTagPath = (locale:string, tag:string)=>{
-  const directories = [tagDirectoryNames[locale]]
+  const directories = [directoryNames.tags[locale]]
   return getPagePath(locale, directories, tag)
 }

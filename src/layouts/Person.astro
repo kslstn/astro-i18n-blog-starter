@@ -1,0 +1,23 @@
+---
+import Page from '@layouts/Page.astro'
+const { frontmatter } = Astro.props
+const person = frontmatter.person
+const contactDataAreAvailable = person.mail || person.mastodon
+---
+
+<Page {frontmatter}>
+	{contactDataAreAvailable &&
+		<table>
+			<tr>
+				{person.mail &&
+					<tr><td>Mail</td><td><a href={`mailto:${person.mail}`}>{person.mail}</a></td></tr>
+				}
+				{person.mastodon &&
+					<tr><td>Mastodon</td><td><a href={`https://${person.mastodon}`}>{person.mastodon}</a></td></tr>
+				}
+			</tr>
+		</table>
+	}
+
+	<p>{person.description[Astro.currentLocale]}</p>
+</Page>

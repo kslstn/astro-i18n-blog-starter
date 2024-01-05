@@ -1,0 +1,33 @@
+---
+import { locales } from '@i18n/i18n';
+import { uiStrings } from '@i18n/ui';
+import { people, getPersonPath } from "@utilities/people";
+import Person from "@layouts/Person.astro";
+import { truncateDescription } from "@utilities/getPageDescription";
+
+export async function getStaticPaths() {
+  const getDescription = function(locale:string, person){
+    const fullDescription = person.description[locale]
+    return truncateDescription(fullDescription ? fullDescription : `${uiStrings.personProfilePageDescription[locale]} ${person.fullName}.`)
+  }
+  let allPeoplePages:any = []
+  for (let locale of locales) {
+    const peopleParsed = people
+    .map(person=>(
+      {
+        params: {
+          person: `${getPersonPath(locale, person.id)}`,
+        },
+        props: {
+          title: person.fullName,
+          description: getDescription(locale, person),
+          person: person,
+        }
+      }
+    ))
+    allPeoplePages.push(...peopleParsed)
+  }
+  return allPeoplePages
+}
+---
+<Person frontmatter={Astro.props} />

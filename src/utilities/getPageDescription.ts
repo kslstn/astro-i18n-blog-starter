@@ -23,7 +23,8 @@ export function truncateDescription(description:string){
 
 export function getPageDescription(page){
 	// Unlike for getPostDescription(), here we don't attempt to get the first sentence. The body may be to short for it.
-	return (typeof page.rawContent() === 'undefined') ? '' : truncateDescription(removeMd(page.rawContent()))
+	if (page) return (typeof page.rawContent() === 'undefined') ? '' : truncateDescription(removeMd(page.rawContent()))
+	return ''
 }
 
 export function getPostDescription(post){

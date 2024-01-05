@@ -1,5 +1,5 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
-import {getLocaleFromUrl} from '@src/i18n/utils'
+import {getLocaleFromUrl} from '@i18n/utilities'
 
 export default async function getPublishedPosts(locale:String, collection:String = 'blog', sort:String = 'reverseChronological'){
   let posts = (await getCollection(collection)).filter(({ data }) => !data.secret)
