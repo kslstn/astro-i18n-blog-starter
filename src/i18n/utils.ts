@@ -16,8 +16,8 @@ export function localeIsInUrl(locale:string, url:string){
 }
 
 export async function getStaticPaths(pages) {
-  return pages.map(entry => ({
-    params: { slug: entry.slug },
-    props: { entry },
+  return pages.map(page => ({
+    params: { slug: page.slug },
+    props: { page },
   }));
 }

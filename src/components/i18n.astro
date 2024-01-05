@@ -45,9 +45,9 @@ if (reference){
 	else{
 		// The current page is part of a collection
 		const translationsSlugs = (await getPublishedPosts('', collection, ''))
-			.filter((entry)=> entry.data.reference === reference)
-			.filter(function(entry){ return getLocaleFromUrl(entry.slug) !== Astro.currentLocale })
-			.map(entry => (entry.slug))
+			.filter((post)=> post.data.reference === reference)
+			.filter(function(post){ return getLocaleFromUrl(post.slug) !== Astro.currentLocale })
+			.map(post => (post.slug))
 
 		for (const slug of translationsSlugs){
 			const locale = getLocaleFromUrl(slug)
