@@ -29,5 +29,6 @@ export async function getStaticPaths() {
   }
   return allPeoplePages
 }
+const frontmatter = Astro.props
 ---
-<Person frontmatter={Astro.props} />
+<Person {frontmatter} />

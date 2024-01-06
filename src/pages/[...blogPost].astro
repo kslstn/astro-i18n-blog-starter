@@ -12,17 +12,12 @@ export async function getStaticPaths() {
 	const posts = await getPublishedPosts('', collection, '');
 	let postsToRender = []
 
-	const completeProps = function(post){
-		post.data.description = getPostDescription(post)
-		return post
-	}
-
   for (let locale of locales) {
     const localePosts = posts
 			.filter(function(entry){ return getLocaleFromUrl(entry.slug) === locale })
 			.map((post) => ({
 				params: { blogPost: `${getPostPath(locale, collection, post.slug)}` },
-				props: completeProps(post),
+				props: post,
 			}));
 		postsToRender.push(...localePosts)
 	}
@@ -32,6 +27,7 @@ type Props = CollectionEntry<'blog'>;
 
 const post = Astro.props;
 const { Content } = await post.render();
+post.data.description = getPostDescription(post)
 ---
 
 <Post {...post.data}>
