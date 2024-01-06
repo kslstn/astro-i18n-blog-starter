@@ -22,7 +22,7 @@ export async function getStaticPaths() {
     .map(tag=>(  
       {
         params: {
-          blogPostsPerTag: `${getTagPath(locale, tag.slugified)}`
+          blogPostsPerTag: `${getTagPath(locale, tag.slugified, false)}`
         },
         props: {
           title: `${uiStrings.tagHeadingSingular[locale]}: ${tag.name}`,

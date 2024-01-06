@@ -26,7 +26,7 @@ export async function getPostsByTag(collection:string, tag:string, locale:string
   return (await getPublishedPosts(locale, collection)).filter(post => post.data.tags.map(item => {return slugify(item)}).includes(slugify(tag)))
 }
 
-export const getTagPath = (locale:string, tag:string)=>{
+export const getTagPath = (locale:string, tag:string, addLeadingSlash:boolean = true)=>{
   const directories = [directoryNames.tags[locale]]
-  return getPagePath(locale, directories, tag)
+  return getPagePath(locale, directories, tag, addLeadingSlash)
 }

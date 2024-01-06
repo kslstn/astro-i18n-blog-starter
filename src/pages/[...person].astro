@@ -16,7 +16,7 @@ export async function getStaticPaths() {
     .map(person=>(
       {
         params: {
-          person: `${getPersonPath(locale, person.id)}`,
+          person: `${getPersonPath(locale, person.id, false)}`,
         },
         props: {
           title: person.fullName,

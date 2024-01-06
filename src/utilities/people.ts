@@ -19,7 +19,7 @@ export const people = peopleData
 	.map(person => ({ ...person, fullName: getFullName(person) }))
 	.map(person => ({ ...person, id: slugify(person.fullName) }))
 
-export const getPersonPath = (locale:string, id:string) => {
+export const getPersonPath = (locale:string, id:string, addLeadingSlash:boolean = true) => {
   const directories = [directoryNames.people[locale]]
-  return getPagePath(locale, directories, id)
+  return getPagePath(locale, directories, id, addLeadingSlash)
 }
