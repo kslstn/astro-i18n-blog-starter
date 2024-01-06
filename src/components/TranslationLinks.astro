@@ -8,7 +8,7 @@ const
 	<p>
 		{pageTranslationsAvailableIn}
 		{translationLinks.map((translation, index) => (
-			<a href={translation.path} hreflang={translation.locale}>
+			<a href={translation.relativeURL} hreflang={translation.locale}>
 				{translation.label}
 			</a>
 			<span>{index < translationLinks.length - 1 ?

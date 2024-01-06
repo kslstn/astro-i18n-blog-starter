@@ -1,7 +1,7 @@
 ---
 import Page from '@layouts/Page.astro'
 import { getPostsByTag } from '@utilities/tags';
-import getPostPath from '@utilities/getPostPath';
+import { getRelativePostPath } from '@utilities/getPostPath';
 
 export interface Props {
   frontmatter: any; 
@@ -16,7 +16,7 @@ const filteredPosts = await getPostsByTag('blog', frontmatter.tag, Astro.current
   <ul>
     {filteredPosts.map(({ data, slug }) => (
       <li>
-        <a href={getPostPath(Astro.currentLocale, collection, slug )}>{data.title}</a>
+        <a href={getRelativePostPath(Astro.currentLocale, collection, slug )}>{data.title}</a>
       </li>
     ))}
   </ul>

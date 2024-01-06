@@ -1,4 +1,4 @@
-import getPostPath from '@utilities/getPostPath';
+import { getRelativePostPath } from '@utilities/getPostPath';
 import getPublishedPosts from '@utilities/getPublishedPosts';
 import {getLocaleFromUrl} from '@i18n/utilities';
 
@@ -7,7 +7,7 @@ export async function getPostsToRenderInRSS(context, locale:string, collection:s
 		.slice(0, 50)
 		.map((post) => ({
 			...post.data,
-			link: getPostPath(locale || getLocaleFromUrl(post.slug), collection, post.slug),
+			link: getRelativePostPath(locale || getLocaleFromUrl(post.slug), collection, post.slug),
 			body: post.body
 		}));
 	return posts

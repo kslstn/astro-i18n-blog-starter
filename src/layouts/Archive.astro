@@ -2,7 +2,7 @@
 import getPublishedPosts from '@utilities/getPublishedPosts';
 import I18n from "@components/I18n.astro";
 import FormattedDate from '@components/FormattedDate.astro';
-import getPostPath from '@utilities/getPostPath';
+import { getRelativePostPath } from '@utilities/getPostPath';
 import {getPostDescription} from '@utilities/getPageDescription';
 
 const
@@ -21,14 +21,14 @@ const posts:Array<any> = await getPublishedPosts(Astro.currentLocale, collection
 		<ul>
 			{posts.map((post) => (
 				<li>
-					<a href={`${getPostPath(Astro.currentLocale, collection, post.slug)}`}>
+					<a href={`${getRelativePostPath(Astro.currentLocale, collection, post.slug)}`}>
 						<img width={720} height={360} src={post.data.previewImage} alt="" />
 						<h2 class="title">{post.data.title}</h2>
 						<p class="date">
 							<FormattedDate date={post.data.pubDate} />
 						</p>
 					</a>
-					<blockquote cite={`${getPostPath(Astro.currentLocale, collection, post.slug)}`}>
+					<blockquote cite={`${getRelativePostPath(Astro.currentLocale, collection, post.slug)}`}>
 						{getPostDescription(post)}
 					</blockquote>
 				</li>
