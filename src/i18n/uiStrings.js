@@ -1,4 +1,9 @@
 export const uiStrings = {
+	siteDescription: {
+		en: 'All the basics for a brand-new blog.',
+		de: 'Die Basics für eine niegelnagelneues Blog',
+		nl: 'De start voor een gloednieuw blog',
+	},
 	skipLink: {
 		en: 'Skip to content',
 		de: 'Zum Inhalt springen',

@@ -1,5 +1,6 @@
 import rss from '@astrojs/rss';
-import { siteTitle, siteDescription } from '../consts';
+import { siteTitle } from '../consts';
+import { uiStrings } from '@i18n/uiStrings';
 import { defaultLocale } from '@i18n/i18n';
 import { getPostsToRenderInRSS } from '@utilities/getPostsToRenderInRSS';
 import sanitizeHtml from 'sanitize-html';
@@ -11,7 +12,7 @@ export async function GET(context){
 
 	return rss({
 		title: siteTitle,
-		description: siteDescription[defaultLocale],
+		description: uiStrings.siteDescription[defaultLocale],
 		site: context.site,
 		items: postsToRender.map((post) => ({
       link: post.link,

@@ -1,7 +1,7 @@
 ---
 const {tags} = Astro.props
 import { getTagPath } from '@utilities/tags';
-import {uiStrings} from "@i18n/ui";
+import {uiStrings} from "@i18n/uiStrings";
 
 const uiString = tags.length === 1 ? uiStrings.tagHeadingSingular[Astro.currentLocale] : uiStrings.tagHeadingPlural[Astro.currentLocale] 
 ---
