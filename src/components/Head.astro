@@ -23,7 +23,6 @@ const
 	mode = import.meta.env.MODE,
 	{frontmatter, includeCanonicalMeta = true} = Astro.props,
 	title = frontmatter?.title ? `${frontmatter.title} | ${siteTitle}` : siteTitle,
-	// description = frontmatter.description || siteDescription,
 	description =  frontmatter?.description,
 	file =  frontmatter?.file,
 	previewImage =  frontmatter?.previewImage || '/blog-placeholder-1.jpg',
@@ -31,7 +30,6 @@ const
 	faviconIco 			= mode === 'development' ? '/favicon-dev.ico' : '/favicon.ico',
 	faviconSVG 			= mode === 'development' ? '/favicon-dev.svg' : '/favicon.svg',
 	appleTouchIcon	= mode === 'development' ? '/apple-touch-icon-dev.png' : '/apple-touch-icon.png';
-
 ---
 
 <!-- Global Metadata -->

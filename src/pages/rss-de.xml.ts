@@ -10,7 +10,7 @@ export async function GET(context) {
 
 	return rss({
 		title: siteTitle,
-		description: siteDescription,
+		description: siteDescription.de,
 		site: context.site,
 		items: postsToRender.map((post) => ({
       link: post.link,
