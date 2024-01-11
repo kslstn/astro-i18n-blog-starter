@@ -13,13 +13,25 @@ import TranslationLinks from "@components/TranslationLinks.astro";
 import Header from "@components/Header.astro";
 import { getAbsolutePostPath, getRelativePostPath } from '@utilities/getPostPath';
 import getPublishedPosts from '@utilities/getPublishedPosts';
+import type { CommonFrontmatter } from '@src/types';
+
+interface Props {
+	frontmatter: CommonFrontmatter,
+	collection: string
+}
+export interface TranslationLink{
+	absoluteURL: string,
+	relativeURL: string,
+	locale: string,
+	label: string
+}
 
 const
-{frontmatter, collection} = Astro.props,
-reference:string = frontmatter?.reference || '';
+	{frontmatter, collection} = Astro.props,
+	reference: string = frontmatter?.reference || '';
 
 let translationsAvailable = []
-let translationLinks:[{absoluteURL: string, relativeURL: string, locale: string, label: string}?] = []
+let translationLinks: TranslationLink[] = []
 
 if (reference){
 	if (collection === 'pages'){

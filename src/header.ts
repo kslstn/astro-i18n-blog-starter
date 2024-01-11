@@ -1,8 +1,13 @@
-export const headerMenu = {
+export type navigationItem = Readonly<{
+	path: string,
+	label: string,
+}>
+
+export const headerMenu: Record<string, Record<string, navigationItem[]>> = {
 	en: {
 		items: [{
 			path: '/',
-			label: 'Home'
+			label: 'Home',
 		},
 		{
 			path: '/blog',

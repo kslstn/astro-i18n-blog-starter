@@ -2,6 +2,15 @@
 import { getUniqueTags } from '@utilities/tags';
 import { getTagPath } from '@utilities/tags';
 import Page from '@layouts/Page.astro'
+import type { CommonFrontmatter } from '@src/types';
+
+interface Frontmatter extends CommonFrontmatter{
+	collection: string
+}
+
+interface Props{
+	frontmatter: Frontmatter
+}
 
 const {frontmatter} = Astro.props
 const tags = (await getUniqueTags(frontmatter.collection, Astro.currentLocale)).filter((tag) => {

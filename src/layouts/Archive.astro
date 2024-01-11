@@ -10,7 +10,8 @@ const
 	title = frontmatter.title,
 	collection = frontmatter.collection;
 
-const posts:Array<any> = await getPublishedPosts(Astro.currentLocale, collection)
+const posts = await getPublishedPosts(Astro.currentLocale, collection)
+
 ---
 <I18n {frontmatter} collection="pages">
 	<main id="main">

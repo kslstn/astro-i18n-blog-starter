@@ -1,5 +1,9 @@
 ---
 import I18n from "@components/MainI18n.astro";
+import type { CommonFrontmatter } from "@src/types";
+interface Props {
+	frontmatter: CommonFrontmatter
+}
 
 const
 	{frontmatter} = Astro.props,

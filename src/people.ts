@@ -1,4 +1,4 @@
-type Person = {
+export type PersonData = {
 	givenName: string
 	surName?: string
 	publishProfile?: boolean
@@ -7,9 +7,7 @@ type Person = {
 	description: object
 };
 
-type People = Person[]
-
-export const peopleData:People = [
+export const peopleData: PersonData[] = [
 	{
 		givenName: 'Ana', 
 		surName: 'Grigoryan',

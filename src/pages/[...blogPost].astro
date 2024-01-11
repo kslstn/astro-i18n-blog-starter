@@ -5,7 +5,7 @@ import { getLocaleFromUrl} from '@i18n/utilities';
 import Post from '@layouts/Post.astro';
 import { getRelativePostPath } from '@utilities/getPostPath';
 import getPublishedPosts from '@utilities/getPublishedPosts';
-import {getPostDescription} from '@utilities/getPageDescription';
+import { getPostDescription } from '@utilities/getPageDescription';
 
 export async function getStaticPaths() {
 	const collection = 'blog'

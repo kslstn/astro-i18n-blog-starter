@@ -1,5 +1,13 @@
 ---
 import Page from '@layouts/Page.astro'
+import type { Person } from "@utilities/people"
+import type { CommonFrontmatter } from '@src/types'
+export interface PersonFrontmatter extends CommonFrontmatter{
+	person: Person
+}
+interface Props {
+	frontmatter: PersonFrontmatter
+}
 const { frontmatter } = Astro.props
 const person = frontmatter.person
 const contactDataAreAvailable = person.mail || person.mastodon

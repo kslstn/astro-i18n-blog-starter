@@ -4,22 +4,19 @@ import { locales } from '@i18n/i18n';
 import { uiStrings } from '@i18n/uiStrings';
 import PostsPerTag from "@layouts/PostsPerTag.astro";
 import { truncateDescription } from "@utilities/getPageDescription";
-
-interface Tag {
-	slugified: string;
-  name: string;
-}
+import type { Tags } from '@utilities/tags';
 
 export async function getStaticPaths() {
-  let allPostsPerTagPages:any = []
-  const getDescription = function(locale, name){
-    const description = truncateDescription(`${uiStrings.postsPerTagPageDescription[locale]} ${name}.`)
+  const collection = 'blog'
+  let allPostsPerTagPages: any[] = []
+  const getDescription = function(locale: string, tagName:string): string{
+    const description = truncateDescription(`${uiStrings.postsPerTagPageDescription[locale]} ${tagName}.`)
     return description
   }
   for (let locale of locales) {
-    const tags = (await getUniqueTags('blog', locale))
-    .filter((tag)=>{return tag.slugified !== 'other'})
-    .map(tag=>(  
+    const realTags: Tags = (await getUniqueTags(collection, locale))
+      .filter((tag)=>{return tag.slugified !== 'other'})
+    const posts = realTags.map(tag=>(  
       {
         params: {
           blogPostsPerTag: `${getTagPath(locale, tag.slugified, false)}`
@@ -28,12 +25,13 @@ export async function getStaticPaths() {
           title: `${uiStrings.tagHeadingSingular[locale]}: ${tag.name}`,
           description: getDescription(tag.name, locale),
           tag: tag.slugified,
+          collection: collection
         }
       }
     ))
-    allPostsPerTagPages.push(...tags)
+    allPostsPerTagPages.push(...posts)
   }
   return allPostsPerTagPages
 }
 ---
-<PostsPerTag frontmatter={Astro.props} collection="blog"/>
+<PostsPerTag frontmatter={Astro.props}/>

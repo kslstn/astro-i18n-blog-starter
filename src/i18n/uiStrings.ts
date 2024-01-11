@@ -1,4 +1,10 @@
-export const uiStrings = {
+interface TypeUIStrings {
+	[key: string]: {
+		[key: string] : string | undefined // If we'd enforce keys to be any of the already added language codes, it'd be impossible to add new locale strings before enabling that locale site-wide.
+	}
+}
+
+export const uiStrings: TypeUIStrings = {
 	siteDescription: {
 		en: 'All the basics for a brand-new blog.',
 		de: 'Die Basics für eine niegelnagelneues Blog',

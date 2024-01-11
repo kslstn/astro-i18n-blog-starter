@@ -1,9 +1,11 @@
-export const defaultLocale:string = "en"
-export const locales:Array<string> = ["en", "nl", "de"]
-export const fallback:object = {
+interface Fallback {
+	[key: string]: string
+}
+export const defaultLocale: string = "en"
+export const locales: string[] = ["en", "nl", "de"]
+export const fallback: Fallback = {
 	nl: "en",
 }
-
 export const directoryNames = {
 	// Define the paths for collections
 	collections: {

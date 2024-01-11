@@ -3,7 +3,7 @@ interface Props {
 	date: Date;
 }
 const { date } = Astro.props;
-const lang  = Astro.currentLocale;
+const lang = Astro.currentLocale;
 ---
 <time datetime={date.toISOString()}>
 	{

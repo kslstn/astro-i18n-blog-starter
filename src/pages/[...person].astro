@@ -6,7 +6,7 @@ import Person from "@layouts/Person.astro";
 import { truncateDescription } from "@utilities/getPageDescription";
 
 export async function getStaticPaths() {
-  const getDescription = function(locale:string, person){
+  const getDescription = function(locale: string, person){
     const fullDescription = person.description[locale]
     return truncateDescription(fullDescription ? fullDescription : `${uiStrings.personProfilePageDescription[locale]} ${person.fullName}.`)
   }

@@ -1,6 +1,11 @@
 ---
 import Html from "@components/Html.astro";
 import Header from "@components/Header.astro";
+import type { CommonFrontmatter } from "@src/types";
+
+interface Props {
+  frontmatter: CommonFrontmatter
+}
 
 const
   {frontmatter} = Astro.props,

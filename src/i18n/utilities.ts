@@ -1,6 +1,6 @@
 import { defaultLocale, locales } from '@i18n/i18n';
 
-export function getLocaleFromUrl(url:string) {
+export function getLocaleFromUrl(url: string): string {
   if (url === undefined) return undefined
   const parts = url.split('/').filter(function (el) {return el !== ''})
   let match = ''
@@ -11,11 +11,11 @@ export function getLocaleFromUrl(url:string) {
   return defaultLocale;
 }
 
-export function localeIsInUrl(locale:string, url:string){
+export function localeIsInUrl(locale: string, url: string): boolean{
   return url.split('/').filter(function (el) {return el !== ''}).includes(locale)
 }
 
-export async function getStaticPaths(pages) {
+export async function getStaticPaths(pages: any): Promise<any[]> {
   return pages.map(page => ({
     params: { slug: page.slug },
     props: { page },

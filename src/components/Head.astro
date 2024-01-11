@@ -1,6 +1,8 @@
 ---
 import { siteTitle, siteThemeColor } from '@src/consts';
 import DescriptionMeta from './DescriptionMeta.astro';
+import type { CommonFrontmatter } from '@src/types';
+
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
@@ -8,25 +10,18 @@ import '@exampledev/new.css'
 import '../styles/prose.css';
 
 interface Props {
-	frontmatter:{
-		title?: string;
-		description?: string;
-		image?: string;
-		previewImage?: string;
-		canonicalURL: string;
-		file: string;
-	}
-	includeCanonicalMeta?: boolean;
+	frontmatter: CommonFrontmatter,
+	includeCanonicalMeta?: boolean
 }
 
 const
 	mode = import.meta.env.MODE,
 	{frontmatter, includeCanonicalMeta = true} = Astro.props,
-	title = frontmatter?.title ? `${frontmatter.title} | ${siteTitle}` : siteTitle,
-	description =  frontmatter?.description,
-	file =  frontmatter?.file,
-	previewImage =  frontmatter?.previewImage || '/blog-placeholder-1.jpg',
-	canonicalURL = new URL(frontmatter?.canonicalURL || Astro.url.pathname, Astro.site),
+	title = frontmatter.title ? `${frontmatter.title} | ${siteTitle}` : siteTitle,
+	description =  frontmatter.description,
+	file =  frontmatter.file,
+	previewImage =  frontmatter.previewImage || '/blog-placeholder-1.jpg',
+	canonicalURL = new URL(frontmatter.canonicalURL || Astro.url.pathname, Astro.site),
 	faviconIco 			= mode === 'development' ? '/favicon-dev.ico' : '/favicon.ico',
 	faviconSVG 			= mode === 'development' ? '/favicon-dev.svg' : '/favicon.svg',
 	appleTouchIcon	= mode === 'development' ? '/apple-touch-icon-dev.png' : '/apple-touch-icon.png';
