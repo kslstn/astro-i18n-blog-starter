@@ -1,20 +1,25 @@
 interface Fallback {
 	[key: string]: string
 }
+type PathNames ={
+	[key: string]: {
+		[key: string]: string
+	}
+}
 export const defaultLocale: string = "en"
-export const locales: string[] = ["en", "nl", "de"]
+export const locales = ["en", "nl", "de"]
 export const fallback: Fallback = {
 	nl: "en",
 }
-export const directoryNames = {
-	// Define the paths for collections
-	collections: {
-		blog: {
-			en: 'blog',
-			de: 'blog',
-			nl: 'blog'
-		},
+// Define the paths for collections
+export const collectionDirectoryNames: PathNames = {
+	blog: {
+		en: 'blog',
+		de: 'blog',
+		nl: 'blog'
 	},
+}
+export const directoryNames: PathNames = {
 	// Define the path for the tag pages (tags list, posts per tag).
 	tags: {
 		en: 'tag',

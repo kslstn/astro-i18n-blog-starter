@@ -4,9 +4,11 @@ import { uiStrings } from '@i18n/uiStrings';
 import { people, getPersonPath } from "@utilities/people";
 import Person from "@layouts/Person.astro";
 import { truncateDescription } from "@utilities/getPageDescription";
+import type { Person as  PersonType } from "@utilities/people"
+import type { Locale } from '@i18n/i18n';
 
 export async function getStaticPaths() {
-  const getDescription = function(locale: string, person){
+  const getDescription = function(locale: Locale, person: PersonType){
     const fullDescription = person.description[locale]
     return truncateDescription(fullDescription ? fullDescription : `${uiStrings.personProfilePageDescription[locale]} ${person.fullName}.`)
   }

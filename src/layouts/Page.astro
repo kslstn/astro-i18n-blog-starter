@@ -1,5 +1,5 @@
 ---
-import I18n from "@components/MainI18n.astro";
+import MainI18n from "@components/MainI18n.astro";
 import type { CommonFrontmatter } from "@src/types";
 interface Props {
 	frontmatter: CommonFrontmatter
@@ -9,11 +9,11 @@ const
 	{frontmatter} = Astro.props,
 	title = frontmatter?.title || '';
 ---
-<I18n {frontmatter} collection="pages">
+<MainI18n {frontmatter} collection="pages">
 	<main id="main" class="prose">
 		{title &&
 			<h1>{title}</h1>
 		}
 		<slot/>
 	</main>
-</I18n>
+</MainI18n>

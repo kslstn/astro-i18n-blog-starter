@@ -10,8 +10,7 @@ export async function getStaticPaths() {
   const collection = 'blog'
   let allPostsPerTagPages: any[] = []
   const getDescription = function(locale: string, tagName:string): string{
-    const description = truncateDescription(`${uiStrings.postsPerTagPageDescription[locale]} ${tagName}.`)
-    return description
+    return truncateDescription(`${uiStrings.postsPerTagPageDescription[locale]} ${tagName}.`)
   }
   for (let locale of locales) {
     const realTags: Tags = (await getUniqueTags(collection, locale))
@@ -23,7 +22,7 @@ export async function getStaticPaths() {
         },
         props: {
           title: `${uiStrings.tagHeadingSingular[locale]}: ${tag.name}`,
-          description: getDescription(tag.name, locale),
+          description: getDescription(locale, tag.name),
           tag: tag.slugified,
           collection: collection
         }

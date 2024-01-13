@@ -1,15 +1,19 @@
 import getPagePath from '@utilities/getPagePath'
-import { directoryNames } from '@i18n/i18n';
+import { collectionDirectoryNames } from '@i18n/i18n';
+import { locales } from '@i18n/i18n';
 import { site } from '@src/consts'
 
-
-export function getRelativePostPath(locale: string, collection: string, slug: string, addLeadingSlash: boolean = true){
+export function getRelativePostPath(locale: string, collection: string, slug: string, addLeadingSlash: boolean = true): string{
   const
 		trueSlug = slug.slice(slug.indexOf('/') + 1), // remove /[locale]/ from start of slug
-		collectionDirectory = [directoryNames.collections[collection][locale]];
-  return getPagePath(locale, collectionDirectory, trueSlug, addLeadingSlash)
+		collectionDirectory = [collectionDirectoryNames[collection][locale]];
+	if (locales.includes(locale)) return getPagePath(locale, collectionDirectory, trueSlug, addLeadingSlash)
+	else {
+		console.error('Unknown locale', locale)
+		return undefined
+	}
 }
 
-export function getAbsolutePostPath(locale: string, collection: string, slug: string){
+export function getAbsolutePostPath(locale: string, collection: string, slug: string): string{
 	return `${site}${getRelativePostPath(locale, collection, slug, true)}`
 }

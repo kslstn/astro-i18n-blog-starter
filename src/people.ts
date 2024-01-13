@@ -4,7 +4,9 @@ export type PersonData = {
 	publishProfile?: boolean
 	mail?: string
 	mastodon?: string
-	description: object
+	description: {
+		[key: string]: string
+	}
 };
 
 export const peopleData: PersonData[] = [

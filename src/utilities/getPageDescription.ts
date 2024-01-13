@@ -1,6 +1,6 @@
 import removeMd from 'remove-markdown'
 
-const getFirstSentence = function(s): string{
+const getFirstSentence = function(s: string): string{
 	const regexp = /(^.*?[a-z]{2,}[.!?]+)\s+\W*[A-Z]/gm
 	const matches = s.matchAll(regexp);
 	let result = ''
@@ -21,13 +21,13 @@ export function truncateDescription(description: string): string{
 	return description
 }
 
-export function getPageDescription(page): string{
+export function getPageDescription(page: any): string{
 	// Unlike for getPostDescription(), here we don't attempt to get the first sentence. The body may be to short for it.
 	if (page) return (typeof page.rawContent() === 'undefined') ? '' : truncateDescription(removeMd(page.rawContent()))
 	return ''
 }
 
-export function getPostDescription(post): string{
+export function getPostDescription(post: any): string{
 	if (post) return post.data.description === '' ? truncateDescription(getFirstSentence(removeMd(post.body))) : truncateDescription(post.data.description)
 	return ''
 }

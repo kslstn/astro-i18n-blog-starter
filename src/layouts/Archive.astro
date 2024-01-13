@@ -1,6 +1,6 @@
 ---
 import getPublishedPosts from '@utilities/getPublishedPosts';
-import I18n from "@components/MainI18n.astro";
+import MainI18n from "@components/MainI18n.astro";
 import FormattedDate from '@components/FormattedDate.astro';
 import { getRelativePostPath } from '@utilities/getPostPath';
 import {getPostDescription} from '@utilities/getPageDescription';
@@ -11,9 +11,8 @@ const
 	collection = frontmatter.collection;
 
 const posts = await getPublishedPosts(Astro.currentLocale, collection)
-
 ---
-<I18n {frontmatter} collection="pages">
+<MainI18n {frontmatter} collection="pages">
 	<main id="main">
 		<header class="prose">
 			<h1>{title}</h1>
@@ -36,4 +35,4 @@ const posts = await getPublishedPosts(Astro.currentLocale, collection)
 			))}
 		</ul>
 	</main>
-</I18n>
+</MainI18n>
