@@ -28,6 +28,6 @@ export function getPageDescription(page: any): string{
 }
 
 export function getPostDescription(post: any): string{
-	if (post) return post.data.description === '' ? truncateDescription(getFirstSentence(removeMd(post.body))) : truncateDescription(post.data.description)
+	if (post) return post.data.description ? truncateDescription(post.data.description) : truncateDescription(getFirstSentence(removeMd(post.body))) 
 	return ''
 }
