@@ -16,9 +16,7 @@ const
   <main id="main" tabindex=”1”>
     <article>
       <header>
-        <div>
-          {previewImage && <img width={1020} height={510} src={previewImage} alt="" />}
-        </div>
+        {previewImage && <img width={1020} height={510} src={previewImage} alt="" />}
         <h1>{title}</h1>
         <Byline authorFullName={author} {pubDate} {updatedDate}>
       </header>
