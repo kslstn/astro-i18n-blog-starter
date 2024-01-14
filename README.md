@@ -5,7 +5,8 @@
 I found that out of the box, the Astro 4.0 [blog example](https://github.com/withastro/astro/tree/latest/examples/blog) and [internationalization/localization (i18n)](https://docs.astro.build/en/guides/internationalization/) features require quite a bit of work to become a fully working, SEO-optimized and screen reader-friendly blog. This project attempts to make getting started a bit easier.
 
 ## Requirements and goals
-- Use built-in features and reduce additional dependencies where possible. The assumption is that the Astro team will expand  i18n features and that parts of this setup can be replaced with built-in functions in the future.
+
+- Use built-in features and reduce additional dependencies where possible. The assumption is that the Astro team will expand i18n features and that parts of this setup can be replaced with built-in functions in the future.
 - Add a minimum of styling and hard-coded settings, so you can quickly get to styling and configuring your own site.
 - Allow for multiple collections (don't abuse collections for localization)
 - Separate layouts, components and content; make sure all content is saved in markdown and data files.
@@ -15,7 +16,7 @@ I found that out of the box, the Astro 4.0 [blog example](https://github.com/wit
 
 - ⛓️ Linked translations via a reference property: no need for matching slugs between locales.
 - 🏷️ Content tags á la WordPress
-- 🗺️ Sitemap support with translation links 
+- 🗺️ Sitemap support with translation links
 - 📡 Localized RSS Feeds
 - 🌍 Customizable URL structure, like `domain.tld/locale/directory/slug`
 - 🪽 Skip to content link for screen reader and keyboard users
@@ -70,15 +71,14 @@ Any static assets, like images, can be placed in the `public/` directory.
 
 All default commands can be run from the root of the project, from a terminal:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
+| Command                    | Action                                           |
+| :------------------------- | :----------------------------------------------- |
+| `pnpm install`             | Installs dependencies                            |
+| `pnpm run dev`             | Starts local dev server at `localhost:4321`      |
+| `pnpm run build`           | Build your production site to `./dist/`          |
+| `pnpm run preview`         | Preview your build locally, before deploying     |
+| `pnpm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `pnpm run astro -- --help` | Get help using the Astro CLI                     |
 
 ## To do
 
