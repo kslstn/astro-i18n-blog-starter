@@ -22,7 +22,7 @@ export async function getUniqueTags(collection:any, locale: string = ''): Promis
     .sort((tagA, tagB) => tagA.slugified.localeCompare(tagB.slugified));
 };
 
-export async function getPostsByTag(collection: string, tag: string, locale: string) {
+export async function getPostsByTag(collection: "blog", tag: string, locale: string) {
   return (await getPublishedPosts(locale, collection)).filter(post => post.data.tags.map(item => {return slugify(item)}).includes(slugify(tag)))
 }
 
