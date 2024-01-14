@@ -23,6 +23,8 @@
     "sanitize-html": "^2.11.0"
   },
   "devDependencies": {
-    "@types/remove-markdown": "^0.3.4"
+    "@types/markdown-it": "^13.0.7",
+    "@types/remove-markdown": "^0.3.4",
+    "@types/sanitize-html": "^2.9.5"
   }
 }

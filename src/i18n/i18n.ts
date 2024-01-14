@@ -1,11 +1,14 @@
+export type Locale = "en" | "nl" | "de" | string;
+
 interface Fallback {
 	[key: string]: string
 }
-type PathNames ={
+type PathNames = {
 	[key: string]: {
-		[key: string]: string
+		[locale in Locale]: string
 	}
-}
+};
+
 export const defaultLocale: string = "en"
 export const locales = ["en", "nl", "de"]
 export const fallback: Fallback = {

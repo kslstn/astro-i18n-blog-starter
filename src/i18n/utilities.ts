@@ -15,7 +15,7 @@ export function localeIsInUrl(locale: string, url: string): boolean{
   return url.split('/').filter(function (el) {return el !== ''}).includes(locale)
 }
 
-export async function getStaticPaths(pages: any): Promise<any[]> {
+export async function getStaticPaths(pages: any[]): Promise<any[]> {
   return pages.map(page => ({
     params: { slug: page.slug },
     props: { page },

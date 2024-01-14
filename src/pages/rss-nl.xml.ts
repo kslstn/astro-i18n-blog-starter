@@ -4,9 +4,10 @@ import { uiStrings } from '@i18n/uiStrings';
 import { getPostsToRenderInRSS } from '@utilities/getPostsToRenderInRSS';
 import sanitizeHtml from 'sanitize-html';
 import MarkdownIt from 'markdown-it';
+import type { APIContext } from 'astro';
 const parser = new MarkdownIt();
 
-export async function GET(context) {
+export async function GET(context: APIContext) {
 	const postsToRender = await getPostsToRenderInRSS(context, 'nl', 'blog')
 
 	return rss({
@@ -14,9 +15,11 @@ export async function GET(context) {
 		description: uiStrings.siteDescription.nl,
 		site: context.site,
 		items: postsToRender.map((post) => ({
-      link: post.link,
+			title: post.title ?? "",
+			pubDate: post.pubDate ?? new Date(),
+			link: post.link,
 			content: sanitizeHtml(parser.render(post.body)),
 			...post
-    })),
+		})),
 	});
 }

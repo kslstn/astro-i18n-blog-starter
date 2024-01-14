@@ -1,6 +1,8 @@
+import type { Locale } from "./i18n";
+
 interface TypeUIStrings {
 	[key: string]: {
-		[key: string] : string | undefined // If we'd enforce keys to be any of the already added language codes, it'd be impossible to add new locale strings before enabling that locale site-wide.
+		[locale in Locale] : string | undefined // If we'd enforce keys to be any of the already added language codes, it'd be impossible to add new locale strings before enabling that locale site-wide.
 	}
 }
 

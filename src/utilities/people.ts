@@ -9,7 +9,7 @@ export interface Person extends PersonData {
  id: string
 }
 
-const getFullName = function(person){
+const getFullName = function(person: PersonData){
 	let fullName = person.givenName
 	if (person.surName) fullName += ` ${person.surName}`
 	if (!fullName) {

@@ -5,9 +5,10 @@ import { defaultLocale } from '@i18n/i18n';
 import { getPostsToRenderInRSS } from '@utilities/getPostsToRenderInRSS';
 import sanitizeHtml from 'sanitize-html';
 import MarkdownIt from 'markdown-it';
+import type { APIContext } from 'astro';
 const parser = new MarkdownIt();
 
-export async function GET(context){
+export async function GET(context: APIContext){
 	const postsToRender = await getPostsToRenderInRSS(context, '', 'blog')
 
 	return rss({
@@ -15,9 +16,11 @@ export async function GET(context){
 		description: uiStrings.siteDescription[defaultLocale],
 		site: context.site,
 		items: postsToRender.map((post) => ({
-      link: post.link,
+			title: post.title ?? "",
+			pubDate: post.pubDate ?? new Date(),
+			link: post.link,
 			content: sanitizeHtml(parser.render(post.body)),
 			...post
-    })),
+		})),
 	});
 }
