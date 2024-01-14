@@ -55,4 +55,9 @@ export const uiStrings: TypeUIStrings = {
 		de: 'Profil von',
 		nl: 'Profiel van'
 	},
+	notFound: {
+		en: 'Page not found',
+		de: 'Seite nicht gefunden',
+		nl: 'Pagina niet gevonden'
+	},
 };

@@ -1,0 +1,19 @@
+---
+import Header from "@components/Header.astro";
+import Html from "@components/Html.astro";
+import { uiStrings } from "@i18n/uiStrings";
+
+const lang = Astro.currentLocale;
+const title = uiStrings.notFound[lang];
+---
+
+<Html frontmatter={{ title, description: title }}>
+  <Header />
+  <main id="main">
+    <article class="prose">
+      <h1>{title}</h1>
+      <p>404!</p>
+      <slot />
+    </article>
+  </main>
+</Html>
