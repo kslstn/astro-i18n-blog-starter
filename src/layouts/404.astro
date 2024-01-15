@@ -1,9 +1,14 @@
 ---
 import Header from "@components/Header.astro";
 import Html from "@components/Html.astro";
+import type { Locale } from "@i18n/i18n";
 import { uiStrings } from "@i18n/uiStrings";
 
-const lang = Astro.currentLocale;
+interface Props {
+  lang: Locale;
+}
+const { lang } = Astro.props;
+
 const title = uiStrings.notFound[lang];
 ---
 
