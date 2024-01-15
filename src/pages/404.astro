@@ -1,5 +1,8 @@
 ---
 import NotFound from "@layouts/404.astro";
+
+// hack that in production we always use english, but in development we use the current locale
+const locale = import.meta.env.PROD ? "en" : Astro.currentLocale;
 ---
 
-<NotFound lang="en" />
+<NotFound locale={locale} />
