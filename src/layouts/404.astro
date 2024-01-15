@@ -9,6 +9,7 @@ interface Props {
 }
 const { lang } = Astro.props;
 
+console.log("lang", lang, uiStrings.notFound[lang]);
 const title = uiStrings.notFound[lang];
 ---
 
