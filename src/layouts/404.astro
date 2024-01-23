@@ -5,11 +5,12 @@ import type { Locale } from "@i18n/i18n";
 import { uiStrings } from "@i18n/uiStrings";
 
 interface Props {
-  locale: Locale;
+  lang: Locale;
 }
-const { locale } = Astro.props;
+const { lang } = Astro.props;
 
-const title = uiStrings.notFound[locale];
+console.log("lang", lang, uiStrings.notFound[lang]);
+const title = uiStrings.notFound[lang];
 ---
 
 <Html frontmatter={{ title, description: title }}>
