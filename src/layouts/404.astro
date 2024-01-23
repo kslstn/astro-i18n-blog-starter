@@ -1,0 +1,22 @@
+---
+import Html from "@components/Html.astro";
+import Header from "@components/Header.astro";
+import type { CommonFrontmatter } from "@src/types";
+
+interface Props {
+  frontmatter: CommonFrontmatter
+}
+
+const
+  {frontmatter} = Astro.props,
+	title = frontmatter.title;
+---
+<Html {frontmatter} includeCanonicalMeta={false} />
+  <Header />
+  <main id="main">
+    <article class="prose">
+      <h1>{title}</h1>
+      <slot/>
+    </article>
+  </main>
+</Html>
