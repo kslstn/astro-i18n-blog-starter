@@ -2,18 +2,45 @@
 import Header from "@components/Header.astro";
 import Html from "@components/Html.astro";
 import { uiStrings } from "@i18n/uiStrings";
-
-const lang = Astro.currentLocale;
-const title = uiStrings.notFound[lang];
+import { locales, defaultLocale } from "@i18n/i18n";
+const title = uiStrings.pageNotFoundHeading[defaultLocale]
 ---
 
 <Html frontmatter={{ title, description: title }}>
   <Header />
   <main id="main">
     <article class="prose">
-      <h1>{title}</h1>
-      <p>404!</p>
+      {locales.map((locale)=>(
+        <h1 lang={locale} style="display: none">{uiStrings.pageNotFoundHeading[locale]}</h1>
+        <p lang={locale} style="display: none">{uiStrings.pageNotFoundBody[locale]}</p>
+        <>
+          {locale === defaultLocale &&
+            <noscript>
+              <h1 lang={defaultLocale}>{uiStrings.pageNotFoundHeading[defaultLocale]}</h1>
+              <p lang={defaultLocale}>{uiStrings.pageNotFoundBody[defaultLocale]}</p>
+            </noscript>
+          }
+        </>
+      ))}
       <slot />
     </article>
   </main>
 </Html>
+
+<script define:vars={{locales: locales, defaultLocale: defaultLocale}}>
+  (function(){
+    const agentLanguage = window.navigator.language.slice(0, defaultLocale.length);
+    const selectedLanguage = locales.includes(agentLanguage) ? agentLanguage : defaultLocale
+    let nodes = []
+    for (const locale of locales){
+      nodes = [...nodes, ...document.querySelectorAll(`#main [lang="${locale}"]`)]
+    }
+    for (const node of nodes){
+      if (node.getAttribute('lang') !== selectedLanguage) node.remove()
+      else{
+        if (node.tagName.toLowerCase() === 'h1') document.title = node.innerHTML
+        node.style['display'] = 'block'
+      }
+    }
+  })()
+</script>

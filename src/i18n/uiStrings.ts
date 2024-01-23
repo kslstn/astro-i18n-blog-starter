@@ -57,9 +57,14 @@ export const uiStrings: TypeUIStrings = {
 		de: 'Profil von',
 		nl: 'Profiel van'
 	},
-	notFound: {
+	pageNotFoundHeading: {
 		en: 'Page not found',
 		de: 'Seite nicht gefunden',
 		nl: 'Pagina niet gevonden'
+	},
+	pageNotFoundBody: {
+		en: '404!',
+		de: '404!',
+		nl: '404!'
 	},
 };
