@@ -12,10 +12,7 @@ export interface Person extends PersonData {
 const getFullName = function(person: PersonData){
 	let fullName = person.givenName
 	if (person.surName) fullName += ` ${person.surName}`
-	if (!fullName) {
-		console.error('Person needs at least a given name or surname.')
-		fullName = 'Person'
-	}
+	if (!fullName) throw new Error('Person needs at least a given name or surname.')
 	fullName = fullName.trim()
 	return fullName
 }
