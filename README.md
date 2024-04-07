@@ -2,7 +2,7 @@
 
 > [Live demo](https://astro-i18n-blog-starter.netlify.app/)
 
-I found that out of the box, the Astro 4.0 [blog example](https://github.com/withastro/astro/tree/latest/examples/blog) and [internationalization/localization (i18n)](https://docs.astro.build/en/guides/internationalization/) features require quite a bit of work to become a fully working, SEO-optimized and screen reader-friendly blog. This project attempts to make getting started a bit easier.
+I found that out of the box, the Astro 4.5 [blog example](https://github.com/withastro/astro/tree/latest/examples/blog) and [internationalization/localization (i18n)](https://docs.astro.build/en/guides/internationalization/) features require quite a bit of work to become a fully working, SEO-optimized and screen reader-friendly blog. This project attempts to make getting started a bit easier.
 
 ## Requirements and goals
 
