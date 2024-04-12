@@ -23,9 +23,6 @@ dependencies:
   astro:
     specifier: ^4.5.16
     version: 4.5.16
-  github-slugger:
-    specifier: ^2.0.0
-    version: 2.0.0
   markdown-it:
     specifier: ^14.1.0
     version: 14.1.0
