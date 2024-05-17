@@ -20,7 +20,7 @@ export const uiStrings: TypeUIStrings = {
 	pageTranslationsAvailableIn: {
 		en: 'This page is also available in',
 		de: 'Diese Seite gibt es auch auf',
-		nl: 'Deze text is ook beschikbaar in het'
+		nl: 'Deze tekst is ook beschikbaar in het'
 	},
 	en: {
 		en: 'English',
