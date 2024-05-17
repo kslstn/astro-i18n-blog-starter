@@ -16,10 +16,6 @@ const
 		{translationLinks.map((translation, index) => (
 			<a href={translation.relativeURL} hreflang={translation.locale}>
 				{translation.label}
-			</a>
-			<span>{index < translationLinks.length - 1 ?
-				', ' : ''
-			}</span>
-		))}.
+			</a><>{index < translationLinks.length - 1 ? ', ' : null}</>))}.
 	</p>
 }
