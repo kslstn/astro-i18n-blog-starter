@@ -1,32 +1,36 @@
 ---
-import { defaultLocale, fallback } from '@i18n/i18n';
-import HeaderLink from './HeaderLink.astro';
-import { headerMenu } from '@src/header';
-import type { navigationItem } from '@src/header';
+import { defaultLocale, fallback } from "@i18n/i18n";
+import HeaderLink from "./HeaderLink.astro";
+import { headerMenu } from "@src/header";
+import type { navigationItem } from "@src/header";
 
-const menuLocale: string =  headerMenu[Astro.currentLocale] ? Astro.currentLocale : fallback[Astro.currentLocale] || defaultLocale
-const headerMenuItems: navigationItem[] = headerMenu[menuLocale].items
-
+// If no items are available for the page's locale, the items for the defaultLocale will be used:
+const menuLocale: string = headerMenu[Astro.currentLocale]
+  ? Astro.currentLocale
+  : fallback[Astro.currentLocale] || defaultLocale;
+const headerMenuItems: navigationItem[] = headerMenu[menuLocale].items;
 ---
 
 <header>
-	<nav>
-		<slot />
-		<ul class="header__list">
-			{headerMenuItems.map((item) => (
-				<HeaderLink href={item.path}>{item.label}</HeaderLink>
-			))}
-		</ul>
-	</nav>
+  <nav>
+    <slot />
+    <ul class="header__list">
+      {
+        headerMenuItems.map((item) => (
+          <HeaderLink href={item.path}>{item.label}</HeaderLink>
+        ))
+      }
+    </ul>
+  </nav>
 </header>
 
 <style>
-	.header__list{
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-		gap: 1em;
-		max-width: 100%;
-		overflow-x: auto;
-	}
+  .header__list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1em;
+    max-width: 100%;
+    overflow-x: auto;
+  }
 </style>
