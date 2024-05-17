@@ -15,6 +15,7 @@ I found that out of the box, the Astro 4.5 [blog example](https://github.com/wit
 ## Features
 
 - ⛓️ Linked translations via a reference property: no need for matching slugs between locales.
+- 🏖️ Allow adding pages for a new locale with minimal effort; use the default locale* as a fallback for missing settings and strings.
 - 🏷️ Content tags á la WordPress
 - 🗺️ Sitemap support with translation links
 - 📡 Localized RSS Feeds
@@ -26,6 +27,8 @@ I found that out of the box, the Astro 4.5 [blog example](https://github.com/wit
 - 🐭 Ultra minimal styling without CSS classes with [new.css](https://newcss.net/) (remove only two lines of code to remove it!)
 - 🔗 `target="_blank"` for external links with [Rehype plugin](https://github.com/rehypejs/rehype-external-links)
 - 😉 Separate favicon for dev server to not get confused between dev and production
+
+*) This is why the Dutch demo pages have an English header menu; no Dutch menu items were defined.
 
 Based on the official [blog example](https://github.com/withastro/astro/tree/latest/examples/blog), this setup still has:
 
