@@ -1,8 +1,30 @@
 # Astro i18n blog starter
 
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
 > [Live demo](https://astro-i18n-blog-starter.netlify.app/)
 
 I found that out of the box, the Astro 4.5 [blog example](https://github.com/withastro/astro/tree/latest/examples/blog) and [internationalization/localization (i18n)](https://docs.astro.build/en/guides/internationalization/) features require quite a bit of work to become a fully working, SEO-optimized and screen reader-friendly blog. This project attempts to make getting started a bit easier.
+
+> [!CAUTION]
+> I've stopped maintenance of this starter, because:
+> 1. Keeping this repo updated with Astro's changes takes quit a bit of time, whereas pulling in changes to sites that are based can likely result in merge conflicts.
+> 2. The way it redefines collection pages' 'slugs' (paths) using `getPagePath()` and `getPostPath()` works fine, but I've found that it's convoluted and that it's easier to use file path-based routing instead—even if that involves a slightly complicated glob pattern with the default language not having a path prefix.
+
+> [!IMPORTANT]  
+> There's one feature you may still find interesting to see in this project: finding translations of pages. Other starters often rely on file names to find translations, making it impossible to make locale-specific URLs. In this repo you find that pages can have a `reference` frontmatter value. `MainI18n.astro` creates an array of all translations of the current page, based on that value.
+
+> [!TIP]
+> To create the what I called a 'slighly complicated glob pattern' above, you can define [the loader](https://docs.astro.build/en/guides/content-collections/#defining-the-collection-loader) (that's an Astro 5 thing) for the blog collection like this:
+> ```js
+> const bblogCollection = defineCollection({
+>   loader: glob({
+>     pattern: "{blog,nl/blog,de/blog}/**/*.{md,mdx}",
+>     base: "./src/content/",
+>   }),
+>   // ...
+> })
+> ```
 
 ## Requirements and goals
 
